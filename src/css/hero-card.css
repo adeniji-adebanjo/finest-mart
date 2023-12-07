@@ -1,0 +1,23 @@
+.product-container {
+  border: 1px solid var(--black);
+  border-radius: 2em;
+  overflow: hidden;
+  text-align: center;
+  padding: 10px; /* Adjust padding as needed */
+}
+
+.product-details {
+  padding: 10px; /* Adjust padding as needed */
+}
+
+.product-name {
+  font-weight: bold;
+  margin: 0;
+  font-size: 16px; /* Adjust font size as needed */
+}
+
+.product-price {
+  color: var(--red); /* Adjust color as needed */
+  margin: 0;
+  font-size: 12px; /* Adjust font size as needed */
+}

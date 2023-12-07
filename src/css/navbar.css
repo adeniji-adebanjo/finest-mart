@@ -1,0 +1,48 @@
+header {
+  margin: 20px 80px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo h4 {
+  color: var(--red);
+}
+.logo h4 span {
+  color: var(--yellow);
+}
+
+.menu a {
+  margin-right: 25px;
+  text-decoration: none;
+  color: var(--grey1);
+}
+
+.menu a:active {
+  color: var(--red);
+  text-decoration: underline;
+}
+.btn {
+  margin-right: 20px;
+}
+
+.btn .signin {
+  border: none;
+  padding: 10px;
+  background: none;
+  font-weight: 300;
+  color: var(--red);
+  text-decoration: underline;
+}
+
+.btn .signup {
+  background-color: var(--red);
+  color: var(--white);
+  border-radius: 16px;
+  padding: 10px;
+  border: 1px solid;
+  font-weight: 300;
+  cursor: pointer;
+}

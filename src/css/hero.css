@@ -1,0 +1,76 @@
+.hero-container {
+  margin: 50px 0 0;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 4fr 5fr 3fr; /* 4 units, 5 units, 3 units */
+  gap: 10px;
+  margin: 0 80px;
+}
+
+/* Example styling for items within the grid */
+.item {
+  padding: 10px;
+  border: none solid #ccc;
+}
+.item span {
+  color: var(--red);
+}
+.item p {
+  font-size: 15px;
+}
+.item h2 {
+  font-size: 2em !important;
+  font-weight: 600 !important;
+}
+.item,
+h2,
+p,
+form {
+  line-height: 1.5em;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+li {
+  width: 48%;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+li:before {
+  content: "\2713";
+  color: var(--white);
+  margin-right: 8px;
+  background-color: var(--yellow);
+  border-radius: 50%;
+  line-height: 1.2em;
+  padding: 0.2em;
+}
+form {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+input {
+  padding: 7px;
+  border: 1px solid #ccc;
+  background-color: var(--grey);
+  outline: none;
+}
+
+/* Style for the search icon */
+.search-icon {
+  background-color: var(--red);
+  padding: 7px;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
