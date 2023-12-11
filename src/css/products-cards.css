@@ -1,0 +1,17 @@
+.product-cards {
+  display: grid;
+  margin: 0 80px;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(180px, 1fr)
+  ); /* Adjust the minmax values as needed */
+  gap: 20px; /* Adjust the gap between items as needed */
+}
+.products h5 {
+  font-weight: 500;
+}
+
+.products p {
+  font-size: 12px;
+  font-weight: 200;
+}

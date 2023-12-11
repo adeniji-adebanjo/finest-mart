@@ -3,7 +3,7 @@
   display: grid;
   align-items: center;
   grid-template-columns: 4fr 5fr 3fr; /* 4 units, 5 units, 3 units */
-  gap: 10px;
+  /* gap: 6px; */
   margin: 0 80px;
 }
 

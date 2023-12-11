@@ -3,21 +3,26 @@
   border-radius: 2em;
   overflow: hidden;
   text-align: center;
-  padding: 10px; /* Adjust padding as needed */
+  padding: 5px;
+  margin-bottom: 20px;
+}
+.product-container img {
+  width: 80px;
+  height: 80px;
 }
 
-.product-details {
-  padding: 10px; /* Adjust padding as needed */
-}
+/* .product-details {
+  padding: 10px;
+} */
 
 .product-name {
   font-weight: bold;
   margin: 0;
-  font-size: 16px; /* Adjust font size as needed */
+  font-size: 10px;
 }
 
 .product-price {
-  color: var(--red); /* Adjust color as needed */
+  color: var(--red);
   margin: 0;
-  font-size: 12px; /* Adjust font size as needed */
+  font-size: 12px;
 }
