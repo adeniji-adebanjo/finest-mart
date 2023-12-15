@@ -20,7 +20,9 @@ nav {
   text-decoration: none;
   color: var(--grey1);
 }
-
+.menu a:hover {
+  color: var(--red);
+}
 .menu a.active {
   color: var(--red);
   /* text-decoration: underline; */
