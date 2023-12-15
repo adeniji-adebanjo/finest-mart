@@ -5,8 +5,8 @@ import "../css/products-cards.css";
 const ProductCardsItem = ({ imageSrc, title, description }) => {
   return (
     <div className="products">
-      <img src={imageSrc} alt={title} />
-      <h5>{title}</h5>
+      <img src={imageSrc} width={"50px"} height={"50px"} alt={title} />
+      <h6>{title}</h6>
       <p>{description}</p>
     </div>
   );
@@ -17,7 +17,5 @@ ProductCardsItem.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
 };
-
-
 
 export default ProductCardsItem;

@@ -7,8 +7,12 @@
   ); /* Adjust the minmax values as needed */
   gap: 20px; /* Adjust the gap between items as needed */
 }
-.products h5 {
+.products img {
+  align-items: start;
+}
+.products h6 {
   font-weight: 500;
+  font-size: 15px;
 }
 
 .products p {
