@@ -28,11 +28,11 @@ nav {
   /* text-decoration: underline; */
   border-bottom: 1.5px solid var(--red);
 }
-.btn {
+/* .btn {
   margin-right: 20px;
-}
+} */
 
-.btn .signin {
+#signin {
   border: none;
   padding: 10px;
   background: none;
@@ -41,7 +41,7 @@ nav {
   text-decoration: underline;
 }
 
-.btn .signup {
+#signup {
   background-color: var(--red);
   color: var(--white);
   border-radius: 16px;
@@ -49,4 +49,62 @@ nav {
   border: 1px solid;
   font-weight: 300;
   cursor: pointer;
+}
+
+.hamburger-icon {
+  display: none;
+  cursor: pointer;
+}
+
+/* Add media query for mobile screens */
+@media (max-width: 767px) {
+  header {
+    margin: 10px;
+    /* align-items: center; */
+  }
+  nav {
+    justify-content: space-between;
+    /* flex-direction: column; */
+
+    display: flex;
+  }
+  .menu {
+    display: none;
+    /* display: flex; */
+    align-items: flex-start;
+    width: 100%;
+    flex-direction: column;
+  }
+  .menu.open {
+    display: flex;
+    /* position: fixed; */
+  }
+  .menu a {
+    margin: 10px 0;
+    text-decoration: none;
+    color: var(--grey1);
+    display: block;
+  }
+  .menu a:hover {
+    color: var(--red);
+  }
+  .menu a.active {
+    color: var(--red);
+    border-bottom: 1.5px solid var(--red);
+    text-decoration: none;
+  }
+
+  .hamburger-icon {
+    display: block;
+  }
+  .menu button {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: var(--red);
+    color: var(--white);
+    border-radius: 16px;
+    border: 1px solid;
+    font-weight: 300;
+    cursor: pointer;
+  }
 }
