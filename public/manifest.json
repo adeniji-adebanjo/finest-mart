@@ -1,6 +1,6 @@
 {
   "short_name": "Finest-Mart",
-  "name": "Finest-Mart", // Updated name
+  "name": "Finest-Mart",
   "icons": [
     {
       "src": "favicon.ico",
@@ -22,7 +22,7 @@
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff",
-  "description": "A convenient online shopping experience for all your needs.", // Optional
+  "description": "A convenient online shopping experience for all your needs.",
   "lang": "en-US",
   "maskable": true
 }
