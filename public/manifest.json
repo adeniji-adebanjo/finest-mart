@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Finest-Mart",
+  "name": "Finest-Mart", // Updated name
   "icons": [
     {
       "src": "favicon.ico",
@@ -21,5 +21,8 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "description": "A convenient online shopping experience for all your needs.", // Optional
+  "lang": "en-US",
+  "maskable": true
 }
