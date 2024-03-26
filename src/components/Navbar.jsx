@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import "../css/navbar.css";
 import "../css/styleguide.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faShoppingBag,
-  faBars,
-  faTimes,
-} from "@fortawesome/free-solid-svg-icons";
+import { faShoppingBag, faBars } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
