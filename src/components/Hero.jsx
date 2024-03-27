@@ -14,7 +14,7 @@ const Hero = () => {
         </h2>
         <p>
           Get fresh groceries online without stepping out to make delicious food
-          with the freshest ingredients
+          with the freshest ingredients.
         </p>
         <form action="#">
           <input

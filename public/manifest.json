@@ -21,7 +21,7 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff",
+  "background_color": "#000",
   "description": "A convenient online shopping experience for all your needs.",
   "lang": "en-US",
   "maskable": true
