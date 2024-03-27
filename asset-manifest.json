@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/finest-mart/static/css/main.d644b4b5.css",
+    "main.js": "/finest-mart/static/js/main.9a171b56.js",
+    "static/js/453.e9856f56.chunk.js": "/finest-mart/static/js/453.e9856f56.chunk.js",
+    "index.html": "/finest-mart/index.html",
+    "main.d644b4b5.css.map": "/finest-mart/static/css/main.d644b4b5.css.map",
+    "main.9a171b56.js.map": "/finest-mart/static/js/main.9a171b56.js.map",
+    "453.e9856f56.chunk.js.map": "/finest-mart/static/js/453.e9856f56.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d644b4b5.css",
+    "static/js/main.9a171b56.js"
+  ]
+}
