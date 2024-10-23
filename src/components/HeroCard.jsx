@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import "../css/hero-card.css";
 import "../css/styleguide.css";
 
@@ -21,15 +22,22 @@ const HeroCard = ({ onAddToCart }) => {
       <div className="product-details">
         <p className="product-name">Fresh Spinach</p>
         <p className="product-price">$12.00</p>
-        <button
-          className="add-to-cart"
-          onClick={inCart ? null : handleAddToCart}
-          disabled={inCart} // Disable button if in cart
-          style={{ cursor: inCart ? "not-allowed" : "pointer" }} // Change cursor style
-        >
-          <FontAwesomeIcon icon={faShoppingCart} />{" "}
-          {inCart ? "View Cart" : "Add to cart"}
-        </button>
+        {inCart ? (
+          // Wrap the View Cart button in a Link component
+          <Link to="/cart" className="view-cart">
+            <button className="add-to-cart">
+              <FontAwesomeIcon icon={faShoppingCart} /> View Cart
+            </button>
+          </Link>
+        ) : (
+          <button
+            className="add-to-cart"
+            onClick={handleAddToCart}
+            style={{ cursor: "pointer" }}
+          >
+            <FontAwesomeIcon icon={faShoppingCart} /> Add to cart
+          </button>
+        )}
       </div>
     </div>
   );

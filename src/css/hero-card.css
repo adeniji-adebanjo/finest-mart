@@ -30,3 +30,15 @@
 .add-to-cart:hover {
   color: var(--red);
 }
+
+.view-cart {
+  text-decoration: none;
+  color: var(--red);
+}
+
+.add-to-cart {
+  border: none;
+  background: none;
+  color: inherit; /* Use inherited text color */
+  cursor: pointer;
+}
