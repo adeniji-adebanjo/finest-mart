@@ -2,7 +2,7 @@
   "name": "finest-mart",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://adeniji-adebanjo.github.io/finest-mart",
+  "homepage": "https://finest-mart.netlify.app",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
