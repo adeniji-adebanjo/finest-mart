@@ -3,7 +3,7 @@
   border-radius: 2em;
   overflow: hidden;
   text-align: center;
-  padding: 20px;
+  padding: 5px 20px;
   margin-bottom: 20px;
   max-width: fit-content;
 }
@@ -22,4 +22,11 @@
   color: var(--red);
   margin: 0;
   font-size: 12px;
+}
+.add-to-cart {
+  font-size: 10px;
+  cursor: pointer;
+}
+.add-to-cart:hover {
+  color: var(--red);
 }

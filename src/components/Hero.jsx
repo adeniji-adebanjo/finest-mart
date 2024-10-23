@@ -1,11 +1,20 @@
+// Hero.jsx
 import React from "react";
 import { Container, Row, Col, Form, Button, InputGroup } from "react-bootstrap";
 import HeroCard from "./HeroCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import "../css/hero.css";
+import { useCart } from "../components/CartContext"; // Ensure this is the correct path to your context
 
 const Hero = () => {
+  const { addToCart } = useCart(); // Get the addToCart function from context
+
+  // Define the onAddToCart function
+  const onAddToCart = (item) => {
+    addToCart(item); // Call the addToCart function with the item
+  };
+
   return (
     <Container className="my-3">
       <Row className="align-items-center">
@@ -38,7 +47,7 @@ const Hero = () => {
         {/* Center Section with SVG and Image */}
         <Col md={5} className="text-center position-relative">
           <div style={{ position: "relative" }}>
-            {/* First SVG - Centralized */}
+            {/* SVG and Image as in your code */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="346"
@@ -59,7 +68,7 @@ const Hero = () => {
               />
             </svg>
 
-            {/* Second SVG - Centralized */}
+            {/* Second SVG */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="320"
@@ -92,8 +101,8 @@ const Hero = () => {
 
         {/* Right Section with Hero Cards */}
         <Col md={3}>
-          <HeroCard />
-          <HeroCard />
+          <HeroCard onAddToCart={onAddToCart} />
+          <HeroCard onAddToCart={onAddToCart} />
         </Col>
       </Row>
     </Container>
