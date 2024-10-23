@@ -34,30 +34,6 @@ const ProductCards = () => {
       title: "Flour",
       description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
     },
-    {
-      imageSrc:
-        "https://res.cloudinary.com/ds83mhjcm/image/upload/v1701948824/FinestMart/Dairy_tbfjb5.png",
-      title: "Flour",
-      description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
-    },
-    {
-      imageSrc:
-        "https://res.cloudinary.com/ds83mhjcm/image/upload/v1701948824/FinestMart/Dairy_tbfjb5.png",
-      title: "Flour",
-      description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
-    },
-    {
-      imageSrc:
-        "https://res.cloudinary.com/ds83mhjcm/image/upload/v1701948824/FinestMart/Dairy_tbfjb5.png",
-      title: "Flour",
-      description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
-    },
-    {
-      imageSrc:
-        "https://res.cloudinary.com/ds83mhjcm/image/upload/v1701948824/FinestMart/Dairy_tbfjb5.png",
-      title: "Flour",
-      description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
-    },
   ];
 
   return (
