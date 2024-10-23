@@ -29,7 +29,19 @@ const FinestMartNavbar = () => {
           <div className="d-flex align-items-center">
             <Link to="/cart" className="cart-icon">
               <FontAwesomeIcon icon={faShoppingBag} />
-              {cartCount > 0 && <sup style={{ color: "red" }}>{cartCount}</sup>}
+              {cartCount > 0 && (
+                <sup
+                  style={{
+                    color: "#fff",
+                    backgroundColor: "red",
+                    padding: "2px 5px",
+                    borderRadius: "50%",
+                    fontSize: "9px",
+                  }}
+                >
+                  {cartCount}
+                </sup>
+              )}
             </Link>
             <Navbar.Toggle onClick={toggleMenu} className="border-0">
               <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
@@ -113,7 +125,19 @@ const FinestMartNavbar = () => {
           <Nav.Link as={Link} to="/cart" className="ms-3">
             <div className="cart-icon">
               <FontAwesomeIcon icon={faShoppingBag} />
-              {cartCount > 0 && <sup style={{ color: "red" }}>{cartCount}</sup>}
+              {cartCount > 0 && (
+                <sup
+                  style={{
+                    color: "#fff",
+                    backgroundColor: "red",
+                    padding: "2px 5px",
+                    borderRadius: "50%",
+                    fontSize: "9px",
+                  }}
+                >
+                  {cartCount}
+                </sup>
+              )}
             </div>
           </Nav.Link>
         </Container>
