@@ -38,14 +38,20 @@ const Hero = () => {
         {/* Center Section with SVG and Image */}
         <Col md={5} className="text-center position-relative">
           <div style={{ position: "relative" }}>
-            {/* First SVG */}
+            {/* First SVG - Centralized */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="483"
-              height="511"
+              width="346"
+              height="374"
               viewBox="0 0 483 511"
               fill="none"
-              style={{ position: "absolute", top: 0, left: 0, zIndex: 0 }}
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                zIndex: 0,
+              }}
             >
               <path
                 d="M99.0672 24.3788C103.57 7.57459 120.842 -2.39777 137.647 2.10489L458.961 88.2008C475.765 92.7035 485.737 109.976 481.235 126.78L384.732 486.934C380.229 503.738 362.957 513.71 346.152 509.208L24.8382 423.112C8.03398 418.609 -1.93833 401.337 2.56433 384.532L99.0672 24.3788Z"
@@ -53,14 +59,20 @@ const Hero = () => {
               />
             </svg>
 
-            {/* Second SVG */}
+            {/* Second SVG - Centralized */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="457"
-              height="457"
+              width="320"
+              height="320"
               viewBox="0 0 457 457"
               fill="none"
-              style={{ position: "absolute", top: 0, left: 0, zIndex: 0 }}
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                zIndex: 0,
+              }}
             >
               <path
                 d="M217.52 9.98096C229.821 -2.32055 249.766 -2.32054 262.067 9.98097L446.338 194.252C458.64 206.553 458.64 226.498 446.338 238.8L238.8 446.338C226.498 458.64 206.553 458.64 194.252 446.338L9.981 262.067C-2.32052 249.766 -2.3205 229.821 9.98102 217.52L217.52 9.98096Z"
