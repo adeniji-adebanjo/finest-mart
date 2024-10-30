@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "./components/Navbar";
+import SignUp from "./components/Signup";
 import { CartProvider } from "./components/CartContext";
 import LandingPage from "./pages/LandingPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -19,9 +20,9 @@ const App = () => {
     <CartProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<LandingPage />} />{" "}
-          {/* Ensure correct usage */}
-          <Route path="/cart" element={<Cart />} /> {/* Ensure correct usage */}
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </Router>
     </CartProvider>

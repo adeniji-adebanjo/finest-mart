@@ -81,7 +81,9 @@ const FinestMartNavbar = () => {
               <Button variant="outline-danger" className="me-2">
                 Sign In
               </Button>
-              <Button variant="danger">Sign Up</Button>
+              <Button variant="danger" as={Link} to="/signup">
+                Sign Up
+              </Button>
             </div>
           </Nav>
         </div>
@@ -121,7 +123,9 @@ const FinestMartNavbar = () => {
           <Button variant="outline-danger" className="me-2">
             Sign In
           </Button>
-          <Button variant="danger">Sign Up</Button>
+          <Button variant="danger" as={Link} to="/signup">
+            Sign Up
+          </Button>
           <Nav.Link as={Link} to="/cart" className="ms-3">
             <div className="cart-icon">
               <FontAwesomeIcon icon={faShoppingBag} />
