@@ -1,11 +1,11 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import Navbar from "./Navbar";
+// import Navbar from "./Navbar";
 
 const Cart = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Container className="my-3">
         <h2>Your Cart</h2>
         <Row>

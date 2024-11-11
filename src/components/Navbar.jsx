@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCart } from "./CartContext"; // Assuming useCart provides cartCount
 import { Navbar, Nav, Button, Container } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,15 +7,40 @@ import {
   faBars,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom"; // Import Link for routing
+import { Link, useNavigate } from "react-router-dom"; // Import Link and useNavigate for routing
+import { getAuth, onAuthStateChanged } from "firebase/auth"; // Import Firebase Auth functions
 import "../css/navbar.css"; // Custom CSS for styling
 
-const FinestMartNavbar = ({ isLoggedIn }) => {
+const FinestMartNavbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState(""); // Store the username
   const { cartCount } = useCart(); // Get cartCount from context
+  const navigate = useNavigate(); // Hook to navigate programmatically
+
+  useEffect(() => {
+    const auth = getAuth();
+    // Check if the user is logged in when the component mounts
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+        setUsername(user.displayName || "User"); // Set username (displayName in Firebase Auth)
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+  }, []);
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogout = () => {
+    const auth = getAuth();
+    auth.signOut().then(() => {
+      setIsLoggedIn(false);
+      navigate("/"); // Redirect to home after logging out
+    });
   };
 
   return (
@@ -77,7 +102,7 @@ const FinestMartNavbar = ({ isLoggedIn }) => {
             <Nav.Link as={Link} to="/" className="py-3">
               Contact
             </Nav.Link>
-            {!isLoggedIn && (
+            {!isLoggedIn ? (
               <div className="d-flex justify-content-center py-3">
                 <Button variant="outline-danger" className="me-2">
                   Sign In
@@ -86,6 +111,10 @@ const FinestMartNavbar = ({ isLoggedIn }) => {
                   Sign Up
                 </Button>
               </div>
+            ) : (
+              <Button variant="outline-danger" onClick={handleLogout}>
+                Log Out
+              </Button>
             )}
           </Nav>
         </div>
@@ -134,9 +163,14 @@ const FinestMartNavbar = ({ isLoggedIn }) => {
           ) : (
             <Link to="/dashboard">
               <Button variant="outline-success" className="me-2">
-                Dashboard
+                Logout
               </Button>
             </Link>
+          )}
+          {isLoggedIn && (
+            <span className="ms-3" style={{ fontWeight: "bold" }}>
+              Hello, {username}
+            </span>
           )}
           <Nav.Link as={Link} to="/cart" className="ms-3">
             <div className="cart-icon">

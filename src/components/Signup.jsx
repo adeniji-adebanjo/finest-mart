@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Button, Form, Navbar } from "react-bootstrap"; // Import necessary Bootstrap components
-import { auth } from "../firebaseConfig"; // Import Firebase auth
-import { createUserWithEmailAndPassword } from "firebase/auth"; // Import method for user registration
+import { auth, createUserWithEmailAndPassword } from "../firebaseConfig"; // Import Firebase auth
 import { FaGoogle } from "react-icons/fa"; // Import Google icon from react-icons
+import Swal from "sweetalert2"; // Import SweetAlert2
 
-const SignUp = () => {
+const SignUp = ({ onSignUpSuccess }) => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -25,18 +25,38 @@ const SignUp = () => {
     e.preventDefault();
     setLoading(true); // Start loading
 
-    const { email, password } = formData;
+    const { email, password, username } = formData;
 
     try {
       // Create a new user with Firebase
       await createUserWithEmailAndPassword(auth, email, password);
       console.log("User signed up successfully!");
 
+      // Store user data in localStorage
+      localStorage.setItem("user", JSON.stringify({ username, email }));
+
+      // Notify parent component and pass the username to handle login state
+      onSignUpSuccess(username);
+
+      // Show success message with SweetAlert
+      Swal.fire({
+        icon: "success",
+        title: "Welcome!",
+        text: "Your account has been created successfully!",
+      });
+
       // Redirect to Dashboard after successful sign-up
       navigate("/dashboard"); // Change '/dashboard' to the actual path of your dashboard page
     } catch (error) {
       setError(error.message); // Set error message
       console.error("Error signing up:", error.message);
+
+      // Show error message with SweetAlert
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message, // Display the error message
+      });
     } finally {
       setLoading(false); // Stop loading
     }

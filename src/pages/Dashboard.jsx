@@ -1,12 +1,14 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 
-const Dashboard = () => {
+const Dashboard = ({ username }) => {
   return (
-    <Container>
-      <h1>Welcome to Your Dashboard</h1>
-      {/* Additional dashboard content goes here */}
-    </Container>
+    <>
+      <Container>
+        <h1>Hello {username}, welcome to your Dashboard</h1>
+        {/* Add other dashboard content here */}
+      </Container>
+    </>
   );
 };
 

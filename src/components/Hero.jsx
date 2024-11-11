@@ -30,7 +30,11 @@ const Hero = () => {
           </p>
           <Form>
             <InputGroup>
-              <Form.Control type="search" placeholder="Search here" />
+              <Form.Control
+                type="search"
+                placeholder="Search here... e.g. groceries, vegetables, spinach, dairy products"
+                style={{ fontSize: "12px" }}
+              />
               <Button variant="outline-secondary">
                 <FontAwesomeIcon icon={faSearch} />
               </Button>

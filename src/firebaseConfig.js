@@ -1,12 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; // Import createUserWithEmailAndPassword
 import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCVv4PiHku16Xnszwy9bonFTB_WJe1zq1E",
   authDomain: "finestmart-app.firebaseapp.com",
@@ -22,5 +19,5 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app); // Initialize auth for authentication
 const analytics = getAnalytics(app);
 
-// Export the auth object for use in authentication
-export { auth };
+// Export the auth object and createUserWithEmailAndPassword
+export { auth, createUserWithEmailAndPassword }; // Export createUserWithEmailAndPassword here
