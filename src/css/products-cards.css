@@ -1,15 +1,19 @@
 .product-cards {
   display: grid;
-  margin: 0 80px;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(180px, 1fr)
-  ); /* Adjust the minmax values as needed */
-  gap: 20px; /* Adjust the gap between items as needed */
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  margin: 0 20px;
 }
+
+.products {
+  text-align: center;
+}
+
 .products img {
   align-items: start;
+  height: auto;
 }
+
 .products h6 {
   font-weight: 500;
   font-size: 15px;

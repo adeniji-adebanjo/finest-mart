@@ -105,8 +105,20 @@ const Hero = () => {
 
         {/* Right Section with Hero Cards */}
         <Col md={3}>
-          <HeroCard onAddToCart={onAddToCart} />
-          <HeroCard onAddToCart={onAddToCart} />
+          <Row>
+            <Col xs={6} md={6}>
+              <HeroCard onAddToCart={onAddToCart} />
+            </Col>
+            <Col xs={6} md={6}>
+              <HeroCard onAddToCart={onAddToCart} />
+            </Col>
+            <Col xs={6} md={6}>
+              <HeroCard onAddToCart={onAddToCart} />
+            </Col>
+            <Col xs={6} md={6}>
+              <HeroCard onAddToCart={onAddToCart} />
+            </Col>
+          </Row>
         </Col>
       </Row>
     </Container>
