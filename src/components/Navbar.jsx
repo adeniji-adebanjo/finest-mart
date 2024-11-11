@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom"; // Import Link for routing
 import "../css/navbar.css"; // Custom CSS for styling
 
-const FinestMartNavbar = () => {
+const FinestMartNavbar = ({ isLoggedIn }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const { cartCount } = useCart(); // Get cartCount from context
 
@@ -77,14 +77,16 @@ const FinestMartNavbar = () => {
             <Nav.Link as={Link} to="/" className="py-3">
               Contact
             </Nav.Link>
-            <div className="d-flex justify-content-center py-3">
-              <Button variant="outline-danger" className="me-2">
-                Sign In
-              </Button>
-              <Button variant="danger" as={Link} to="/signup">
-                Sign Up
-              </Button>
-            </div>
+            {!isLoggedIn && (
+              <div className="d-flex justify-content-center py-3">
+                <Button variant="outline-danger" className="me-2">
+                  Sign In
+                </Button>
+                <Button variant="danger" as={Link} to="/signup">
+                  Sign Up
+                </Button>
+              </div>
+            )}
           </Nav>
         </div>
       </div>
@@ -120,12 +122,22 @@ const FinestMartNavbar = () => {
               Contact
             </Nav.Link>
           </Nav>
-          <Button variant="outline-danger" className="me-2">
-            Sign In
-          </Button>
-          <Button variant="danger" as={Link} to="/signup">
-            Sign Up
-          </Button>
+          {!isLoggedIn ? (
+            <>
+              <Button variant="outline-danger" className="me-2">
+                Sign In
+              </Button>
+              <Button variant="danger" as={Link} to="/signup">
+                Sign Up
+              </Button>
+            </>
+          ) : (
+            <Link to="/dashboard">
+              <Button variant="outline-success" className="me-2">
+                Dashboard
+              </Button>
+            </Link>
+          )}
           <Nav.Link as={Link} to="/cart" className="ms-3">
             <div className="cart-icon">
               <FontAwesomeIcon icon={faShoppingBag} />

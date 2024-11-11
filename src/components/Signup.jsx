@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Button, Form, Navbar } from "react-bootstrap"; // Import necessary Bootstrap components
 import { auth } from "../firebaseConfig"; // Import Firebase auth
 import { createUserWithEmailAndPassword } from "firebase/auth"; // Import method for user registration
-// import "../css/signup.css";
+import { FaGoogle } from "react-icons/fa"; // Import Google icon from react-icons
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +14,7 @@ const SignUp = () => {
 
   const [error, setError] = useState(""); // State for error handling
   const [loading, setLoading] = useState(false); // State for loading status
+  const navigate = useNavigate(); // Hook for navigating to other pages
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +31,9 @@ const SignUp = () => {
       // Create a new user with Firebase
       await createUserWithEmailAndPassword(auth, email, password);
       console.log("User signed up successfully!");
-      // You can redirect or perform any other actions here
+
+      // Redirect to Dashboard after successful sign-up
+      navigate("/dashboard"); // Change '/dashboard' to the actual path of your dashboard page
     } catch (error) {
       setError(error.message); // Set error message
       console.error("Error signing up:", error.message);
@@ -112,7 +115,12 @@ const SignUp = () => {
               {loading ? "Signing Up..." : "Sign Up"}
             </Button>
           </Form>
-          <Button variant="outline-danger" className="w-100">
+          {/* Sign Up with Google Button */}
+          <Button
+            variant="outline-danger"
+            className="w-100 d-flex justify-content-center align-items-center"
+          >
+            <FaGoogle className="me-2" /> {/* Google icon with margin */}
             Sign Up with Google
           </Button>
         </Col>
