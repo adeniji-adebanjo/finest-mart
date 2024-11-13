@@ -13,11 +13,27 @@ const App = () => {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
+    // Check if the user is logged in when the app loads
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setIsLoggedIn(true);
       setUsername(JSON.parse(storedUser).username);
     }
+
+    // Listen for changes in localStorage across all tabs
+    const handleStorageChange = (e) => {
+      if (e.key === "user" && e.newValue === null) {
+        setIsLoggedIn(false);
+        setUsername("");
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, []);
 
   const handleLogin = (username) => {
