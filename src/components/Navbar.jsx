@@ -8,7 +8,7 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom"; // Import Link and useNavigate for routing
-import { getAuth, onAuthStateChanged } from "firebase/auth"; // Import Firebase Auth functions
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth"; // Import Firebase Auth functions
 import "../css/navbar.css"; // Custom CSS for styling
 
 const FinestMartNavbar = () => {
@@ -37,8 +37,9 @@ const FinestMartNavbar = () => {
 
   const handleLogout = () => {
     const auth = getAuth();
-    auth.signOut().then(() => {
+    signOut(auth).then(() => {
       setIsLoggedIn(false);
+      setUsername(""); // Clear username after logout
       navigate("/"); // Redirect to home after logging out
     });
   };
@@ -104,7 +105,12 @@ const FinestMartNavbar = () => {
             </Nav.Link>
             {!isLoggedIn ? (
               <div className="d-flex justify-content-center py-3">
-                <Button variant="outline-danger" className="me-2">
+                <Button
+                  variant="outline-danger"
+                  className="me-2"
+                  as={Link}
+                  to="/login"
+                >
                   Sign In
                 </Button>
                 <Button variant="danger" as={Link} to="/signup">
@@ -153,7 +159,12 @@ const FinestMartNavbar = () => {
           </Nav>
           {!isLoggedIn ? (
             <>
-              <Button variant="outline-danger" className="me-2">
+              <Button
+                variant="outline-danger"
+                className="me-2"
+                as={Link}
+                to="/login"
+              >
                 Sign In
               </Button>
               <Button variant="danger" as={Link} to="/signup">
@@ -161,11 +172,16 @@ const FinestMartNavbar = () => {
               </Button>
             </>
           ) : (
-            <Link to="/dashboard">
-              <Button variant="outline-success" className="me-2">
+            <>
+              <Link to="/dashboard">
+                <Button variant="outline-success" className="me-2">
+                  Dashboard
+                </Button>
+              </Link>
+              <Button variant="outline-danger" onClick={handleLogout}>
                 Logout
               </Button>
-            </Link>
+            </>
           )}
           {isLoggedIn && (
             <span className="ms-3" style={{ fontWeight: "bold" }}>

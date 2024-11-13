@@ -46,7 +46,7 @@ const ProductCards = () => {
       </div>
 
       {/* Carousel for small screens */}
-      <Carousel className="d-md-none">
+      <Carousel className="d-md-none" controls indicators>
         {products.map((product, index) => (
           <Carousel.Item key={index}>
             <ProductCardsItem {...product} />

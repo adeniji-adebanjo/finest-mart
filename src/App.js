@@ -1,25 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Login from "./components/Login";
 import SignUp from "./components/Signup";
-import { CartProvider } from "./components/CartContext";
-import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
 import Cart from "./components/Cart";
-import "./App.css";
-import "./css/styleguide.css";
+import { CartProvider } from "./components/CartContext";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    // Check local storage for user info (persist login state after refresh)
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setIsLoggedIn(true);
@@ -30,10 +23,11 @@ const App = () => {
   const handleLogin = (username) => {
     setIsLoggedIn(true);
     setUsername(username);
+    localStorage.setItem("user", JSON.stringify({ username }));
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("user"); // Clear localStorage on logout
+    localStorage.removeItem("user");
     setIsLoggedIn(false);
     setUsername("");
   };
@@ -51,6 +45,10 @@ const App = () => {
           <Route
             path="/signup"
             element={<SignUp onSignUpSuccess={handleLogin} />}
+          />
+          <Route
+            path="/login"
+            element={<Login onLoginSuccess={handleLogin} />}
           />
           <Route
             path="/dashboard"
