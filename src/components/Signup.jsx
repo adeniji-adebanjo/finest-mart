@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Container, Row, Col, Button, Form, Navbar } from "react-bootstrap"; // Import necessary Bootstrap components
-import { auth, createUserWithEmailAndPassword } from "../firebaseConfig"; // Import Firebase auth
-import { FaGoogle } from "react-icons/fa"; // Import Google icon from react-icons
-import Swal from "sweetalert2"; // Import SweetAlert2
+import { Container, Row, Col, Button, Form, Navbar } from "react-bootstrap";
+import {
+  auth,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "../firebaseConfig"; // Import Firebase
+import { FaGoogle } from "react-icons/fa"; // Google icon
+import Swal from "sweetalert2"; // For alerts
 
 const SignUp = ({ onSignUpSuccess }) => {
   const [formData, setFormData] = useState({
@@ -12,9 +17,9 @@ const SignUp = ({ onSignUpSuccess }) => {
     password: "",
   });
 
-  const [error, setError] = useState(""); // State for error handling
-  const [loading, setLoading] = useState(false); // State for loading status
-  const navigate = useNavigate(); // Hook for navigating to other pages
+  const [error, setError] = useState(""); // For error handling
+  const [loading, setLoading] = useState(false); // For loading state
+  const navigate = useNavigate(); // Hook for navigation
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,49 +28,86 @@ const SignUp = ({ onSignUpSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Start loading
+    setLoading(true);
 
     const { email, password, username } = formData;
 
     try {
-      // Create a new user with Firebase
+      // Firebase email/password sign-up
       await createUserWithEmailAndPassword(auth, email, password);
       console.log("User signed up successfully!");
 
       // Store user data in localStorage
       localStorage.setItem("user", JSON.stringify({ username, email }));
 
-      // Notify parent component and pass the username to handle login state
+      // Notify parent component (update login state)
       onSignUpSuccess(username);
 
-      // Show success message with SweetAlert
+      // Success alert
       Swal.fire({
         icon: "success",
         title: "Welcome!",
         text: "Your account has been created successfully!",
       });
 
-      // Redirect to Dashboard after successful sign-up
-      navigate("/dashboard"); // Change '/dashboard' to the actual path of your dashboard page
+      // Navigate to Dashboard
+      navigate("/dashboard");
     } catch (error) {
-      setError(error.message); // Set error message
+      setError(error.message);
       console.error("Error signing up:", error.message);
 
-      // Show error message with SweetAlert
+      // Show error alert
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: error.message, // Display the error message
+        text: error.message,
       });
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignUp = async () => {
+    const provider = new GoogleAuthProvider();
+
+    try {
+      // Sign in with Google
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      console.log("Google sign-in successful!", user);
+
+      // Store user data in localStorage
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ username: user.displayName, email: user.email })
+      );
+
+      // Notify parent component
+      onSignUpSuccess(user.displayName);
+
+      // Success alert
+      Swal.fire({
+        icon: "success",
+        title: "Welcome!",
+        text: "You have signed up with Google successfully!",
+      });
+
+      // Redirect to Dashboard
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Google sign-in error:", error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
     }
   };
 
   return (
     <Container className="signup-container">
       <Row>
-        {/* First Column */}
         <Col
           md={6}
           className="d-flex flex-column align-items-center justify-content-center"
@@ -81,14 +123,12 @@ const SignUp = ({ onSignUpSuccess }) => {
           />
         </Col>
 
-        {/* Second Column */}
         <Col
           md={6}
           className="d-flex flex-column align-items-center justify-content-center"
         >
           <h2 className="mb-4">Sign Up</h2>
-          {error && <p className="text-danger">{error}</p>}{" "}
-          {/* Display error message */}
+          {error && <p className="text-danger">{error}</p>}
           <Form onSubmit={handleSubmit} className="w-75">
             <Form.Group controlId="formUsername" className="mb-3">
               <Form.Label>Username</Form.Label>
@@ -135,12 +175,19 @@ const SignUp = ({ onSignUpSuccess }) => {
               {loading ? "Signing Up..." : "Sign Up"}
             </Button>
           </Form>
-          {/* Sign Up with Google Button */}
+
+          {/* Fieldset with "or" text */}
+          <fieldset className="w-100 mb-3">
+            <legend className="text-center">or</legend>
+          </fieldset>
+
+          {/* Google Sign Up Button */}
           <Button
             variant="outline-danger"
             className="w-100 d-flex justify-content-center align-items-center"
+            onClick={handleGoogleSignUp}
           >
-            <FaGoogle className="me-2" /> {/* Google icon with margin */}
+            <FaGoogle className="me-2" />
             Sign Up with Google
           </Button>
         </Col>

@@ -1,11 +1,12 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-} from "firebase/auth"; // Import createUserWithEmailAndPassword
-import { getAnalytics } from "firebase/analytics";
+  signInWithPopup,
+} from "firebase/auth";
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore"; // Updated imports for Firestore v9+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -20,8 +21,15 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app); // Initialize auth for authentication
-const analytics = getAnalytics(app);
+const auth = getAuth(app); // Initialize Firebase Authentication
+const db = getFirestore(app); // Initialize Firestore
 
-// Export the auth object and createUserWithEmailAndPassword
-export { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword }; // Export createUserWithEmailAndPassword here
+// Export the auth and db objects
+export {
+  auth,
+  db, // Export db for Firestore usage
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+};
