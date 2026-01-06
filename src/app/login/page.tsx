@@ -113,7 +113,7 @@ const Login = () => {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full rounded-full"
+              className="w-full rounded-lg cursor-pointer"
             >
               {loading ? "Logging in..." : "Login"}
             </Button>

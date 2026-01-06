@@ -9,13 +9,13 @@ import {
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCVv4PiHku16Xnszwy9bonFTB_WJe1zq1E",
-  authDomain: "finestmart-app.firebaseapp.com",
-  projectId: "finestmart-app",
-  storageBucket: "finestmart-app.appspot.com",
-  messagingSenderId: "572533206483",
-  appId: "1:572533206483:web:fe115e95368c06b4d89326",
-  measurementId: "G-GHZ0FQB788",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase (singleton pattern for Next.js hot reload)
