@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import { Search } from "lucide-react";
 import { useCart } from "../app/providers";
@@ -14,9 +13,18 @@ const HeroCard = ({ onAddToCart }: { onAddToCart: (item: any) => void }) => {
     <Card className="group hover:shadow-xl transition-all duration-300 border-border">
       <CardContent className="flex flex-col items-center p-3">
         <div className="h-20 w-20 bg-muted rounded-full mb-3 overflow-hidden">
-          <div className="w-full h-full bg-green-100 flex items-center justify-center text-green-600 text-xs font-semibold">
-            Fresh
+          <div className="w-full h-full  flex items-center justify-center text-green-600 text-xs font-semibold">
+            <Image
+              src="/images/spinach.png"
+              alt="Spinach"
+              width={80}
+              height={80}
+              className="object-contain"
+            />
           </div>
+          {/* <div className="w-full h-full bg-green-100 flex items-center justify-center text-green-600 text-xs font-semibold">
+            Fresh
+          </div> */}
         </div>
         <h4 className="text-sm font-bold text-foreground">Spinach</h4>
         <p className="text-xs text-muted-foreground mb-2">$12.99</p>

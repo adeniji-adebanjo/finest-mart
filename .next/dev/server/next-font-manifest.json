@@ -1,7 +1,7 @@
 {
   "app": {
-    "[project]/app/page": [
-      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
+    "[project]/src/app/page": [
+      "static/media/c825fd02acae0153-s.p.1692d83b.woff2"
     ]
   },
   "appUsingSizeAdjust": true,

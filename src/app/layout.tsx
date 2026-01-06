@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Raleway } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
-import Navbar from "../components/Navbar";
+import { LayoutWrapper } from "./layout-wrapper";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const raleway = Raleway({ subsets: ["latin"], variable: "--font-raleway" });
 
 export const metadata: Metadata = {
   title: "Finest Mart",
@@ -19,15 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} font-sans antialiased bg-gray-50 min-h-screen flex flex-col`}
+        className={`${raleway.variable} font-sans antialiased bg-gray-50 min-h-screen flex flex-col`}
       >
         <Providers>
-          <Navbar />
-          <main className="flex-grow">{children}</main>
-
-          <footer className="py-8 text-center text-gray-500 text-sm bg-white border-t border-gray-100">
-            © {new Date().getFullYear()} Finest Mart. All rights reserved.
-          </footer>
+          <LayoutWrapper>{children}</LayoutWrapper>
         </Providers>
       </body>
     </html>
