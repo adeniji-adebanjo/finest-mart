@@ -8,7 +8,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
-} from "../lib/firebase";
+} from "@/lib/firebase";
 import { useAuth } from "../providers";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";

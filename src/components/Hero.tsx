@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { Search } from "lucide-react";
-import { useCart } from "../providers";
+import { useCart } from "../app/providers";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
