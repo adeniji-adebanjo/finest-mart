@@ -1,12 +1,12 @@
 {
   "app": {
-    "[project]/app/cart/page": [
+    "[project]/src/app/cart/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ],
-    "[project]/app/dashboard/page": [
-      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
+    "[project]/src/app/dashboard/page": [
+      "static/media/c825fd02acae0153-s.p.1692d83b.woff2"
     ],
-    "[project]/app/page": [
+    "[project]/src/app/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ]
   },

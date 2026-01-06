@@ -12,10 +12,7 @@ const nextConfig = {
       },
     ],
   },
-  // Support files from legacy_src and legacy_public
-  publicRuntimeConfig: {
-    legacyAssetsPath: "/legacy_public",
-  },
+
 };
 
 module.exports = nextConfig;

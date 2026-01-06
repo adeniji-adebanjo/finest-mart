@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @layer base {
   :root {
@@ -34,7 +32,7 @@
 
     --radius: 0.5rem;
 
-    --font-inter: "Inter", sans-serif;
+    --font-raleway: "Raleway", sans-serif;
   }
 
   .dark {
