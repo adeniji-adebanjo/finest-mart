@@ -1,0 +1,20 @@
+/* [next]/internal/font/google/raleway_7157c3ee.module.css [app-client] (css) */
+@font-face {
+  font-family: Raleway Fallback;
+  src: local(Arial);
+  ascent-override: 90.51%;
+  descent-override: 22.53%;
+  line-gap-override: 0.0%;
+  size-adjust: 103.86%;
+}
+
+.raleway_7157c3ee-module__B-lSHq__className {
+  font-family: Raleway, Raleway Fallback;
+  font-style: normal;
+}
+
+.raleway_7157c3ee-module__B-lSHq__variable {
+  --font-raleway: "Raleway", "Raleway Fallback";
+}
+
+/*# sourceMappingURL=%5Bnext%5D_internal_font_google_raleway_7157c3ee_module_css_bad6b30c._.single.css.map*/

@@ -19,6 +19,8 @@ import { Card } from "@/components/ui/card";
 // Icons
 import { FaGoogle } from "react-icons/fa";
 
+export const dynamic = "force-dynamic";
+
 const SignUp = () => {
   const [formData, setFormData] = useState({
     username: "",

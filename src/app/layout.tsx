@@ -4,7 +4,11 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { LayoutWrapper } from "./layout-wrapper";
 
-const raleway = Raleway({ subsets: ["latin"], variable: "--font-raleway" });
+const raleway = Raleway({
+  subsets: ["latin"],
+  variable: "--font-raleway",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Finest Mart",
@@ -17,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${raleway.variable} font-sans antialiased bg-gray-50 min-h-screen flex flex-col`}
       >
