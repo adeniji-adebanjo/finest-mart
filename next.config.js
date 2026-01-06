@@ -12,7 +12,8 @@ const nextConfig = {
       },
     ],
   },
-
+  // Explicitly set output if needed
+  output: "standalone",
 };
 
 module.exports = nextConfig;
