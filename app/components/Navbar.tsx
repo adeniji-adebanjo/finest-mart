@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useAuth, useCart } from "../providers";
 import { ShoppingBag, Menu, X, User } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -32,7 +33,10 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
       <nav className="glass px-6 py-4 flex items-center justify-between">
         {/* Brand */}
-        <Link href="/" className="text-2xl font-bold tracking-tight">
+        <Link
+          href="/"
+          className="text-2xl font-bold tracking-tight text-foreground"
+        >
           Finest<span className="text-yellow-500">Mart</span>
         </Link>
 
@@ -42,7 +46,7 @@ const Navbar = () => {
             <Link
               key={link.name}
               href={link.href}
-              className="text-gray-700 hover:text-yellow-500 transition-colors font-medium"
+              className="text-muted-foreground hover:text-primary transition-colors font-medium"
             >
               {link.name}
             </Link>
@@ -50,137 +54,162 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Actions */}
-        <div className="hidden lg:flex items-center space-x-6">
+        <div className="hidden lg:flex items-center space-x-4">
           {!isLoggedIn ? (
             <>
-              <Link
-                href="/login"
-                className="px-4 py-2 rounded-full border border-red-500 text-red-500 hover:bg-red-50 transition-colors font-semibold"
+              <Button
+                asChild
+                variant="outline"
+                className="border-red-500 text-red-500 hover:bg-red-50 hover:text-red-500"
               >
-                Sign In
-              </Link>
-              <Link
-                href="/signup"
-                className="px-4 py-2 rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors font-semibold shadow-md hover:shadow-lg"
+                <Link href="/login">Sign In</Link>
+              </Button>
+              <Button
+                asChild
+                className="bg-red-500 hover:bg-red-600 text-white"
               >
-                Sign Up
-              </Link>
+                <Link href="/signup">Sign Up</Link>
+              </Button>
             </>
           ) : (
             <>
-              <Link href="/dashboard">
-                <button className="px-4 py-2 rounded-full border border-green-500 text-green-600 hover:bg-green-50 transition-colors font-semibold">
-                  Dashboard
-                </button>
-              </Link>
-              <button
+              <div className="flex items-center space-x-2 mr-2">
+                <User size={18} className="text-muted-foreground" />
+                <span className="text-sm font-medium">Hi, {username}</span>
+              </div>
+              <Button
+                asChild
+                variant="outline"
+                className="border-green-500 text-green-600 hover:bg-green-50 hover:text-green-700"
+              >
+                <Link href="/dashboard">Dashboard</Link>
+              </Button>
+              <Button
+                variant="outline"
                 onClick={handleLogout}
-                className="px-4 py-2 rounded-full border border-red-500 text-red-500 hover:bg-red-50 transition-colors font-semibold"
+                className="border-red-500 text-red-500 hover:bg-red-50 hover:text-red-600"
               >
                 Logout
-              </button>
-              <div className="flex items-center space-x-1 text-gray-700 font-medium">
-                <User size={18} />
-                <span>Hi, {username}</span>
-              </div>
+              </Button>
             </>
           )}
 
           {/* Cart Icon */}
-          <Link
-            href="/cart"
-            className="relative text-gray-700 hover:text-yellow-600 transition-colors"
+          <Button
+            asChild
+            variant="ghost"
+            size="icon"
+            className="relative hover:bg-transparent hover:text-yellow-600"
           >
-            <ShoppingBag size={24} />
-            {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
-                {cartCount}
-              </span>
-            )}
-          </Link>
+            <Link href="/cart">
+              <ShoppingBag size={24} />
+              {cartCount > 0 && (
+                <span className="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
+          </Button>
         </div>
 
         {/* Mobile Toggle & Cart */}
-        <div className="flex lg:hidden items-center space-x-4">
-          <Link href="/cart" className="relative text-gray-700">
-            <ShoppingBag size={24} />
-            {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
-                {cartCount}
-              </span>
-            )}
-          </Link>
-          <button
+        <div className="flex lg:hidden items-center space-x-2">
+          <Button
+            asChild
+            variant="ghost"
+            size="icon"
+            className="relative hover:bg-transparent"
+          >
+            <Link href="/cart">
+              <ShoppingBag size={24} />
+              {cartCount > 0 && (
+                <span className="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={toggleMenu}
-            className="text-gray-700 focus:outline-none"
+            className="hover:bg-transparent"
           >
             {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+          </Button>
         </div>
       </nav>
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl flex flex-col items-center justify-center space-y-6 lg:hidden animate-in fade-in slide-in-from-top-10 duration-200">
-          <button
+        <div className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl flex flex-col items-center justify-center space-y-6 lg:hidden animate-in fade-in slide-in-from-top-10 duration-200">
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={toggleMenu}
-            className="absolute top-6 right-6 text-gray-700"
+            className="absolute top-6 right-6"
           >
             <X size={32} />
-          </button>
+          </Button>
 
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
               onClick={() => setIsMenuOpen(false)}
-              className="text-xl font-medium text-gray-800 hover:text-yellow-500"
+              className="text-xl font-medium text-foreground hover:text-primary transition-colors"
             >
               {link.name}
             </Link>
           ))}
 
-          <div className="h-px w-24 bg-gray-200 my-4"></div>
+          <div className="h-px w-24 bg-border my-4"></div>
 
           {!isLoggedIn ? (
             <div className="flex flex-col space-y-4 w-64">
-              <Link
-                href="/login"
-                onClick={() => setIsMenuOpen(false)}
-                className="w-full text-center px-6 py-3 rounded-full border border-red-500 text-red-500 hover:bg-red-50 font-semibold"
+              <Button
+                asChild
+                variant="outline"
+                className="w-full border-red-500 text-red-500 hover:bg-red-50 hover:text-red-500 rounded-full h-12 text-lg"
               >
-                Sign In
-              </Link>
-              <Link
-                href="/signup"
-                onClick={() => setIsMenuOpen(false)}
-                className="w-full text-center px-6 py-3 rounded-full bg-red-500 text-white hover:bg-red-600 font-semibold shadow-md"
+                <Link href="/login" onClick={() => setIsMenuOpen(false)}>
+                  Sign In
+                </Link>
+              </Button>
+              <Button
+                asChild
+                className="w-full bg-red-500 hover:bg-red-600 text-white rounded-full h-12 text-lg shadow-md"
               >
-                Sign Up
-              </Link>
+                <Link href="/signup" onClick={() => setIsMenuOpen(false)}>
+                  Sign Up
+                </Link>
+              </Button>
             </div>
           ) : (
             <div className="flex flex-col space-y-4 w-64">
-              <div className="flex items-center justify-center space-x-2 text-gray-700 font-medium mb-2">
+              <div className="flex items-center justify-center space-x-2 text-foreground font-medium mb-2">
                 <User size={20} />
                 <span>Hi, {username}</span>
               </div>
-              <Link
-                href="/dashboard"
-                onClick={() => setIsMenuOpen(false)}
-                className="w-full text-center px-6 py-3 rounded-full border border-green-500 text-green-600 hover:bg-green-50 font-semibold"
+              <Button
+                asChild
+                variant="outline"
+                className="w-full border-green-500 text-green-600 hover:bg-green-50 hover:text-green-700 rounded-full h-12 text-lg"
               >
-                Dashboard
-              </Link>
-              <button
+                <Link href="/dashboard" onClick={() => setIsMenuOpen(false)}>
+                  Dashboard
+                </Link>
+              </Button>
+              <Button
+                variant="outline"
                 onClick={() => {
                   handleLogout();
                   setIsMenuOpen(false);
                 }}
-                className="w-full text-center px-6 py-3 rounded-full border border-red-500 text-red-500 hover:bg-red-50 font-semibold"
+                className="w-full border-red-500 text-red-500 hover:bg-red-50 hover:text-red-500 rounded-full h-12 text-lg"
               >
                 Logout
-              </button>
+              </Button>
             </div>
           )}
         </div>

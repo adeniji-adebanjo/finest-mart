@@ -11,11 +11,12 @@ import {
 } from "../lib/firebase";
 import { useAuth } from "../providers";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card } from "@/components/ui/card";
 
 // Icons
-import { Chrome } from "lucide-react"; // Using Chrome as a Google-like icon substitute if needed, or stick to FaGoogle if I install react-icons.
-// Note: legacy code used FaGoogle from react-icons/fa. `react-icons` is in package.json. I can reuse it.
-// I'll stick to react-icons since it's installed.
 import { FaGoogle } from "react-icons/fa";
 
 const SignUp = () => {
@@ -91,12 +92,12 @@ const SignUp = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 bg-white rounded-2xl shadow-xl overflow-hidden">
+      <Card className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 bg-background rounded-2xl shadow-xl overflow-hidden border-border">
         {/* Left Content */}
         <div className="hidden md:flex flex-col items-center justify-center p-8 bg-gradient-to-br from-yellow-50 to-orange-50">
           <Link
             href="/"
-            className="text-3xl font-bold mb-8 text-center text-gray-800"
+            className="text-3xl font-bold mb-8 text-center text-foreground"
           >
             Finest<span className="text-yellow-500">Mart</span>
           </Link>
@@ -109,100 +110,95 @@ const SignUp = () => {
 
         {/* Right Form */}
         <div className="flex flex-col justify-center p-8 md:p-12">
-          <h2 className="text-3xl font-extrabold text-gray-900 mb-6 text-center">
+          <h2 className="text-3xl font-extrabold text-foreground mb-6 text-center">
             Create Account
           </h2>
 
           {error && (
-            <div className="bg-red-50 text-red-600 p-3 rounded-md text-sm mb-4">
+            <div className="bg-destructive/15 text-destructive p-3 rounded-md text-sm mb-4">
               {error}
             </div>
           )}
 
           <form className="space-y-5" onSubmit={handleSubmit}>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Username
-              </label>
-              <input
+            <div className="space-y-2">
+              <Label htmlFor="username">Username</Label>
+              <Input
                 type="text"
                 name="username"
+                id="username"
                 required
                 value={formData.username}
                 onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                 placeholder="johndoe"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Email address
-              </label>
-              <input
+            <div className="space-y-2">
+              <Label htmlFor="email">Email address</Label>
+              <Input
                 type="email"
                 name="email"
+                id="email"
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                 placeholder="name@example.com"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <input
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
                 type="password"
                 name="password"
+                id="password"
                 required
                 value={formData.password}
                 onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                 placeholder="••••••••"
               />
             </div>
 
-            <button
+            <Button
               type="submit"
               disabled={loading}
-              className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm text-sm font-bold text-white transition-colors ${
-                loading ? "bg-blue-300" : "bg-blue-600 hover:bg-blue-700"
-              }`}
+              className="w-full rounded-full"
             >
               {loading ? "Creating Account..." : "Sign Up"}
-            </button>
+            </Button>
 
             <div className="relative my-4">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
+                <div className="w-full border-t border-border"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">or</span>
+                <span className="px-2 bg-background text-muted-foreground">
+                  or
+                </span>
               </div>
             </div>
 
-            <button
+            <Button
               type="button"
+              variant="outline"
               onClick={handleGoogleSignUp}
-              className="w-full flex justify-center items-center py-2.5 px-4 border border-gray-300 rounded-full shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+              className="w-full rounded-full"
             >
               <FaGoogle className="mr-2 text-red-500" />
               Sign Up with Google
-            </button>
+            </Button>
 
-            <p className="mt-4 text-center text-sm text-gray-500">
+            <p className="mt-4 text-center text-sm text-muted-foreground">
               Already have an account?{" "}
               <Link
                 href="/login"
-                className="font-medium text-blue-600 hover:text-blue-500"
+                className="font-medium text-primary hover:text-primary/80"
               >
                 Log in
               </Link>
             </p>
           </form>
         </div>
-      </div>
+      </Card>
     </div>
   );
 };
