@@ -545,3 +545,21 @@ FAM | META SEQ | SST SEQ         | RANGE
   2 | 00000485 | 00000430 00000431 00000434 00000445 00000451 00000456 00000467 00000472 OBSOLETE SST
     |          | 00000430 00000431 00000434 00000445 00000451 00000456 00000467 00000472 SST DELETED
     |          | 00000432 00000441 00000449 00000455 00000462 00000470 00000479 META DELETED
+Time 2026-01-07T20:52:10.6876076Z
+Commit 00000492 4 keys in 5ms 154µs 400ns
+FAM | META SEQ | SST SEQ         | RANGE
+  0 | 00000490 | 00000489 SST    |                        [=======================================================================]     | 3aefa6fd5cf2deb4-f42f94001fcb5351 (0 MiB, fresh)
+  1 | 00000491 | 00000487 SST    |                         O                                                                            | 3ffdfb3b7d50fcf1-3ffdfb3b7d50fcf1 (0 MiB, fresh)
+  2 | 00000492 | 00000488 SST    |                         O                                                                            | 3ffdfb3b7d50fcf1-3ffdfb3b7d50fcf1 (0 MiB, fresh)
+Time 2026-01-07T20:52:37.4273252Z
+Commit 00000498 4 keys in 20ms 482µs 800ns
+FAM | META SEQ | SST SEQ         | RANGE
+  0 | 00000496 | 00000495 SST    |                        [=======================================================================]     | 3aefa6fd5cf2deb4-f42f94001fcb5351 (0 MiB, fresh)
+  1 | 00000497 | 00000493 SST    |                         O                                                                            | 3ffdfb3b7d50fcf1-3ffdfb3b7d50fcf1 (0 MiB, fresh)
+  2 | 00000498 | 00000494 SST    |                         O                                                                            | 3ffdfb3b7d50fcf1-3ffdfb3b7d50fcf1 (0 MiB, fresh)
+Time 2026-01-07T20:52:43.4824394Z
+Commit 00000504 4 keys in 7ms 164µs 100ns
+FAM | META SEQ | SST SEQ         | RANGE
+  0 | 00000502 | 00000501 SST    |                        [=======================================================================]     | 3aefa6fd5cf2deb4-f42f94001fcb5351 (0 MiB, fresh)
+  1 | 00000503 | 00000500 SST    |                         O                                                                            | 3ffdfb3b7d50fcf1-3ffdfb3b7d50fcf1 (0 MiB, fresh)
+  2 | 00000504 | 00000499 SST    |                         O                                                                            | 3ffdfb3b7d50fcf1-3ffdfb3b7d50fcf1 (0 MiB, fresh)
