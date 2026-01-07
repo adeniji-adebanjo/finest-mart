@@ -12,6 +12,7 @@ import React, {
 interface CartContextType {
   cartCount: number;
   addToCart: (item?: any) => void;
+  clearCart: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -24,10 +25,7 @@ export const useCart = () => {
   return context;
 };
 
-// --- Auth Context (Simple version to match legacy App.js behavior initially) ---
-// Note: In a real Next.js app, you might use next-auth or keep firebase client-side.
-// We'll mimic the legacy localStorage behavior but wrapped nicely.
-
+// --- Auth Context ---
 interface AuthContextType {
   isLoggedIn: boolean;
   username: string;
@@ -46,28 +44,52 @@ export const useAuth = () => {
 };
 
 export function Providers({ children }: { children: ReactNode }) {
-  // Cart Logic
+  // Cart Logic with persistence
   const [cartCount, setCartCount] = useState(0);
-
-  const addToCart = () => {
-    setCartCount((prev) => prev + 1);
-  };
+  const [cartLoaded, setCartLoaded] = useState(false);
 
   // Auth Logic
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [mounted, setMounted] = useState(false);
 
+  // Load cart from localStorage on mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedCart = localStorage.getItem("cartCount");
+      if (savedCart) {
+        try {
+          const count = parseInt(savedCart, 10);
+          if (!isNaN(count) && count >= 0) {
+            setCartCount(count);
+          }
+        } catch (e) {
+          console.error("Failed to parse cart count", e);
+          localStorage.removeItem("cartCount");
+        }
+      }
+      setCartLoaded(true);
+    }
+  }, []);
+
+  // Load auth from localStorage on mount
   useEffect(() => {
     setMounted(true);
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      try {
-        const parsed = JSON.parse(storedUser);
-        setIsLoggedIn(true);
-        setUsername(parsed.username);
-      } catch (e) {
-        console.error("Failed to parse user", e);
+    if (typeof window !== "undefined") {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        try {
+          const parsed = JSON.parse(storedUser);
+          if (parsed && parsed.username) {
+            setIsLoggedIn(true);
+            setUsername(parsed.username);
+          } else {
+            localStorage.removeItem("user");
+          }
+        } catch (e) {
+          console.error("Failed to parse user data", e);
+          localStorage.removeItem("user");
+        }
       }
     }
 
@@ -77,29 +99,47 @@ export function Providers({ children }: { children: ReactNode }) {
         setUsername("");
       }
     };
+
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
+  const addToCart = () => {
+    setCartCount((prev) => {
+      const newCount = prev + 1;
+      if (typeof window !== "undefined") {
+        localStorage.setItem("cartCount", newCount.toString());
+      }
+      return newCount;
+    });
+  };
+
+  const clearCart = () => {
+    setCartCount(0);
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("cartCount");
+    }
+  };
+
   const login = (user: string) => {
     setIsLoggedIn(true);
     setUsername(user);
-    localStorage.setItem("user", JSON.stringify({ username: user }));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("user", JSON.stringify({ username: user }));
+    }
   };
 
   const logout = () => {
-    localStorage.removeItem("user");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("user");
+    }
     setIsLoggedIn(false);
     setUsername("");
   };
 
-  // Avoid hydration mismatch by rendering children only after mount if using localStorage affecting UI
-  // But for providers, it's usually better to just let it run.
-  // However, isLoggedIn default is false, which matches server.
-
   return (
     <AuthContext.Provider value={{ isLoggedIn, username, login, logout }}>
-      <CartContext.Provider value={{ cartCount, addToCart }}>
+      <CartContext.Provider value={{ cartCount, addToCart, clearCart }}>
         {children}
       </CartContext.Provider>
     </AuthContext.Provider>

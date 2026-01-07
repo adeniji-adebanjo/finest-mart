@@ -1,9 +1,18 @@
 {
   "app": {
+    "[project]/src/app/cart/page": [
+      "static/media/c825fd02acae0153-s.p.1692d83b.woff2"
+    ],
     "[project]/src/app/dashboard/page": [
       "static/media/c825fd02acae0153-s.p.1692d83b.woff2"
     ],
+    "[project]/src/app/login/page": [
+      "static/media/c825fd02acae0153-s.p.1692d83b.woff2"
+    ],
     "[project]/src/app/page": [
+      "static/media/c825fd02acae0153-s.p.1692d83b.woff2"
+    ],
+    "[project]/src/app/signup/page": [
       "static/media/c825fd02acae0153-s.p.1692d83b.woff2"
     ]
   },

@@ -7,6 +7,7 @@ import { ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
+// Force dynamic rendering
 export const dynamic = "force-dynamic";
 
 export default function Cart() {

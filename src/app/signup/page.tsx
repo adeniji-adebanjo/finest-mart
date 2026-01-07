@@ -15,10 +15,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
-
-// Icons
 import { FaGoogle } from "react-icons/fa";
 
+// Force dynamic rendering
 export const dynamic = "force-dynamic";
 
 const SignUp = () => {
@@ -44,9 +43,7 @@ const SignUp = () => {
     const { email, password, username } = formData;
 
     try {
-      // Firebase sign-up
       await createUserWithEmailAndPassword(auth, email, password);
-      // Login context update
       login(username);
 
       Swal.fire({
@@ -95,7 +92,6 @@ const SignUp = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <Card className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 bg-background rounded-2xl shadow-xl overflow-hidden border-border">
-        {/* Left Content */}
         <div className="hidden md:flex flex-col items-center justify-center p-8 bg-gradient-to-br from-yellow-50 to-orange-50">
           <Link
             href="/"
@@ -110,7 +106,6 @@ const SignUp = () => {
           />
         </div>
 
-        {/* Right Form */}
         <div className="flex flex-col justify-center p-8 md:p-12">
           <h2 className="text-3xl font-extrabold text-foreground mb-6 text-center">
             Create Account

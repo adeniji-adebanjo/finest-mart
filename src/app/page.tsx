@@ -2,6 +2,7 @@
 
 import Hero from "../components/Hero";
 
+// Force dynamic rendering for pages using client-side state
 export const dynamic = "force-dynamic";
 
 export default function Home() {

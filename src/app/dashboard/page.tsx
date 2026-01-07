@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../providers";
 import { useRouter } from "next/navigation";
 import {
@@ -11,26 +11,43 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 
+// Force dynamic rendering
 export const dynamic = "force-dynamic";
 
 export default function Dashboard() {
   const { isLoggedIn, username } = useAuth();
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Only redirect if we are sure we are not logged in (and mounted)
-    const storedUser = localStorage.getItem("user");
-    if (!storedUser && !isLoggedIn) {
-      router.push("/login");
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      const storedUser =
+        typeof window !== "undefined" ? localStorage.getItem("user") : null;
+      if (!storedUser && !isLoggedIn) {
+        router.push("/login");
+      }
     }
-  }, [isLoggedIn, router]);
+  }, [mounted, isLoggedIn, router]);
+
+  // Don't render until mounted to prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-pulse text-gray-400">Loading...</div>
+      </div>
+    );
+  }
 
   if (
     !isLoggedIn &&
     typeof window !== "undefined" &&
     !localStorage.getItem("user")
   ) {
-    return null; // Don't render if redirecting
+    return null; // Redirecting...
   }
 
   return (

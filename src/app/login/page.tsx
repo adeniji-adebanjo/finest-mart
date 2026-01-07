@@ -3,14 +3,21 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
-import { auth, signInWithEmailAndPassword } from "@/lib/firebase";
+import {
+  auth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "@/lib/firebase";
 import { useAuth } from "../providers";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
+import { FaGoogle } from "react-icons/fa";
 
+// Force dynamic rendering
 export const dynamic = "force-dynamic";
 
 const Login = () => {
@@ -53,6 +60,30 @@ const Login = () => {
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      login(user.displayName || user.email || "User");
+
+      Swal.fire({
+        icon: "success",
+        title: "Welcome!",
+        text: "You have logged in with Google successfully!",
+      });
+
+      router.push("/dashboard");
+    } catch (error: any) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
     }
   };
 
@@ -118,6 +149,27 @@ const Login = () => {
               className="w-full rounded-lg cursor-pointer"
             >
               {loading ? "Logging in..." : "Login"}
+            </Button>
+
+            <div className="relative my-4">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-border"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-background text-muted-foreground">
+                  or
+                </span>
+              </div>
+            </div>
+
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleGoogleLogin}
+              className="w-full rounded-lg"
+            >
+              <FaGoogle className="mr-2 text-red-500" />
+              Login with Google
             </Button>
           </form>
         </div>

@@ -12,24 +12,24 @@ const HeroCard = ({ onAddToCart }: { onAddToCart: (item: any) => void }) => {
   return (
     <Card className="group hover:shadow-xl transition-all duration-300 border-border">
       <CardContent className="flex flex-col items-center p-3">
-        <div className="h-20 w-20 bg-muted rounded-full mb-3 overflow-hidden">
-          <div className="w-full h-full  flex items-center justify-center text-green-600 text-xs font-semibold">
-            <Image
-              src="/images/spinach.png"
-              alt="Spinach"
-              width={80}
-              height={80}
-              className="object-contain"
-            />
-          </div>
+        <div className="h-20 w-20 bg-muted rounded-full mb-3 overflow-hidden relative">
+          {/* Placeholder - Replace with actual product images */}
           {/* <div className="w-full h-full bg-green-100 flex items-center justify-center text-green-600 text-xs font-semibold">
             Fresh
           </div> */}
+          {/* If you have the spinach.png in public/images/, uncomment below: */}
+          <Image
+            src="/images/spinach.png"
+            alt="Spinach"
+            width={80}
+            height={80}
+            className="object-contain"
+          />
         </div>
-        <h4 className="text-sm font-bold text-foreground">Spinach</h4>
+        <h4 className="text-sm font-bold text-foreground">Fresh Spinach</h4>
         <p className="text-xs text-muted-foreground mb-2">$12.99</p>
         <Button
-          onClick={() => onAddToCart({ name: "Spinach", price: 12.99 })}
+          onClick={() => onAddToCart({ name: "Fresh Spinach", price: 12.99 })}
           size="sm"
           className="w-full h-8 text-xs font-bold rounded-full bg-yellow-400 hover:bg-yellow-500 text-white"
         >
@@ -87,7 +87,7 @@ const Hero = () => {
           </ul>
         </div>
 
-        {/* Center Image */}
+        {/* Center Image - Optimized with Next.js Image */}
         <div className="lg:col-span-5 relative flex justify-center items-center">
           <div className="relative w-[350px] h-[350px] lg:w-[450px] lg:h-[450px]">
             {/* Abstract Blobs */}
@@ -95,11 +95,13 @@ const Hero = () => {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 opacity-20 bg-red-300 rounded-full blur-3xl translate-x-10"></div>
 
             <div className="relative z-10 w-full h-full flex items-center justify-center">
-              <img
+              <Image
                 src="https://res.cloudinary.com/ds83mhjcm/image/upload/v1701948865/FinestMart/delivery-man_c4rwd4.png"
                 alt="Delivery Man"
+                width={450}
+                height={450}
+                priority
                 className="object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
-                style={{ maxHeight: "100%", maxWidth: "100%" }}
               />
             </div>
           </div>
