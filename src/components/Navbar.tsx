@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isLoggedIn, username, logout } = useAuth();
-  const { cartCount } = useCart();
+  const { cartCount, openCart } = useCart();
   const router = useRouter();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -125,19 +125,17 @@ const Navbar = () => {
 
           {/* Cart Icon */}
           <Button
-            asChild
+            onClick={openCart}
             variant="ghost"
             size="icon"
             className="relative text-muted-foreground hover:text-primary hover:bg-primary/5"
           >
-            <Link href="/cart">
-              <ShoppingBag size={20} />
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[10px] font-bold min-w-[18px] h-[18px] flex items-center justify-center rounded-full shadow-sm">
-                  {cartCount > 99 ? "99+" : cartCount}
-                </span>
-              )}
-            </Link>
+            <ShoppingBag size={20} />
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[10px] font-bold min-w-[18px] h-[18px] flex items-center justify-center rounded-full shadow-sm">
+                {cartCount > 99 ? "99+" : cartCount}
+              </span>
+            )}
           </Button>
 
           <div className="w-px h-6 bg-border mx-2" />

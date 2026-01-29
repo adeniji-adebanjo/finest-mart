@@ -15,6 +15,9 @@ interface CartContextType {
   cartItems: CartItem[];
   cartCount: number;
   cartTotal: number;
+  isCartOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
   addToCart: (product: Product, quantity?: number) => void;
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
@@ -175,9 +178,15 @@ export function Providers({ children }: { children: ReactNode }) {
     }
   }, [wishlistItems, mounted]);
 
+  // Cart UI State
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const openCart = () => setIsCartOpen(true);
+  const closeCart = () => setIsCartOpen(false);
+
   // Cart Functions
   const addToCart = useCallback((product: Product, quantity: number = 1) => {
     setCartItems((prev) => {
+      // ... existing logic ...
       const existingIndex = prev.findIndex((item) => item.id === product.id);
       if (existingIndex > -1) {
         const updated = [...prev];
@@ -199,6 +208,7 @@ export function Providers({ children }: { children: ReactNode }) {
         },
       ];
     });
+    setIsCartOpen(true); // Open cart when item is added
   }, []);
 
   const removeFromCart = useCallback((productId: string) => {
@@ -276,6 +286,9 @@ export function Providers({ children }: { children: ReactNode }) {
           cartItems,
           cartCount,
           cartTotal,
+          isCartOpen,
+          openCart,
+          closeCart,
           addToCart,
           removeFromCart,
           updateQuantity,

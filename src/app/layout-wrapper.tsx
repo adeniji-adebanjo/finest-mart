@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Navbar from "../components/Navbar";
 import Link from "next/link";
 import { Heart, Shield, Truck, Clock } from "lucide-react";
+import { CartSheet } from "@/components/cart/CartSheet";
 
 const FooterLink = ({
   href,
@@ -30,6 +31,7 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
   return (
     <>
       {!shouldHideNavbar && <Navbar />}
+      <CartSheet />
       <main className="grow">{children}</main>
       {!shouldHideNavbar && (
         <footer className="bg-card border-t border-border">
