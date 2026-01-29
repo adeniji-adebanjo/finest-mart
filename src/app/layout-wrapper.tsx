@@ -30,7 +30,7 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
   return (
     <>
       {!shouldHideNavbar && <Navbar />}
-      <main className="flex-grow">{children}</main>
+      <main className="grow">{children}</main>
       {!shouldHideNavbar && (
         <footer className="bg-card border-t border-border">
           {/* Trust Badges */}

@@ -22,6 +22,16 @@ const Navbar = () => {
   const router = useRouter();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery("");
+      setIsMenuOpen(false);
+    }
+  };
 
   const handleLogout = () => {
     logout();
@@ -71,11 +81,32 @@ const Navbar = () => {
 
         {/* Desktop Actions */}
         <div className="hidden lg:flex items-center space-x-2">
-          {/* Search Button */}
+          {/* Search Bar */}
+          <form
+            onSubmit={handleSearch}
+            className="hidden xl:flex items-center relative group"
+          >
+            <input
+              type="text"
+              placeholder="Search health products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="bg-primary/5 border border-transparent focus:border-primary/30 focus:bg-background h-10 w-64 pl-4 pr-10 rounded-xl text-sm transition-all focus:w-80 outline-none"
+            />
+            <button
+              type="submit"
+              className="absolute right-3 text-muted-foreground group-focus-within:text-primary transition-colors"
+            >
+              <Search size={18} />
+            </button>
+          </form>
+
+          {/* Search Button (for smaller screens) */}
           <Button
+            onClick={() => router.push("/search")}
             variant="ghost"
             size="icon"
-            className="text-muted-foreground hover:text-primary hover:bg-primary/5"
+            className="xl:hidden text-muted-foreground hover:text-primary hover:bg-primary/5"
           >
             <Search size={20} />
           </Button>

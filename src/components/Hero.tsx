@@ -7,44 +7,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 
-// Mock featured products for hero section
-const featuredProducts = [
-  {
-    id: "1",
-    name: "Vitamin D3",
-    price: 24.99,
-    image: "/images/spinach.png",
-    category: "Vitamins",
-  },
-  {
-    id: "2",
-    name: "Omega-3 Fish Oil",
-    price: 29.99,
-    image: "/images/Dairy.png",
-    category: "Supplements",
-  },
-  {
-    id: "3",
-    name: "Multivitamin Plus",
-    price: 34.99,
-    image: "/images/Baby food.png",
-    category: "Vitamins",
-  },
-  {
-    id: "4",
-    name: "Probiotics",
-    price: 39.99,
-    image: "/images/Condiments.png",
-    category: "Digestive",
-  },
-];
+import { products } from "@/data/products";
+
+// Get a selection of featured products for hero
+const featuredProducts = products
+  .filter((p) => p.isBestSeller || p.isNew)
+  .slice(0, 4);
 
 const Hero = () => {
   return (
     <section className="relative overflow-hidden">
       {/* Background Gradient */}
       <div className="absolute inset-0 ght-gradient-subtle" />
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent" />
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-l from-primary/5 to-transparent" />
 
       <div className="relative max-w-7xl mx-auto px-6 py-16 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -149,7 +124,7 @@ const Hero = () => {
                     } ${index === 3 ? "lg:translate-y-4" : ""}`}
                   >
                     <CardContent className="p-4">
-                      <div className="aspect-square bg-gradient-to-br from-primary/5 to-secondary/10 rounded-xl mb-3 overflow-hidden flex items-center justify-center">
+                      <div className="aspect-square bg-linear-to-br from-primary/5 to-secondary/10 rounded-xl mb-3 overflow-hidden flex items-center justify-center">
                         <Image
                           src={product.image}
                           alt={product.name}
