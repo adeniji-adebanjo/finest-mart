@@ -19,20 +19,28 @@
 
 ### Phase Overview
 
-| Phase | Focus                | Duration | Status  |
-| ----- | -------------------- | -------- | ------- |
-| 1     | Foundation & Cleanup | Week 1   | ✅ DONE |
-| 2     | Product System       | Week 2   | ⏳ Next |
-| 3     | Shopping Cart        | Week 3   | ⬜      |
-| 4     | Checkout System      | Week 4   | ⬜      |
-| 5     | User Accounts        | Week 5   | ⬜      |
-| 6     | Homepage & Landing   | Week 6   | ⬜      |
-| 7     | Forms & Requests     | Week 7   | ⬜      |
-| 8     | Advanced Features    | Week 8   | ⬜      |
-| 9     | UI/UX Polish         | Week 9   | ⬜      |
-| 10    | Testing & Launch     | Week 10  | ⬜      |
+| Phase | Focus                | Duration | Status         |
+| ----- | -------------------- | -------- | -------------- |
+| 1     | Foundation & Cleanup | Week 1   | ✅ DONE        |
+| 2     | Product System       | Week 2   | ✅ DONE        |
+| 3     | Shopping Cart        | Week 3   | ⏳ IN PROGRESS |
+| 4     | Checkout System      | Week 4   | ⬜             |
+| 5     | User Accounts        | Week 5   | ⬜             |
+| 6     | Homepage & Landing   | Week 6   | ⬜             |
+| 7     | Forms & Requests     | Week 7   | ⬜             |
+| 8     | Advanced Features    | Week 8   | ⬜             |
+| 9     | UI/UX Polish         | Week 9   | ⬜             |
+| 10    | Testing & Launch     | Week 10  | ⬜             |
 
-### Current Status: **Phase 2 - COMPLETE ✅**
+### Current Status: **Phase 3 - Shopping Cart Enhancements ⏳**
+
+### Phase 3 Progress:
+
+1. ✅ Cart Drawer (`CartSheet`) implementation with slide-out effect
+2. ✅ Enhanced `CartContext` for visibility state management
+3. ⏳ Cart persistence and Firebase sync
+4. ⏳ Coupon/discount code system foundation
+5. ⏳ Wishlist persistence and management
 
 ### Phase 2 Completed Items:
 
@@ -46,13 +54,12 @@
 8. ✅ Added `ProductQuickView` modal for fast browsing
 9. ✅ Refined Home page with real products
 
-### Next Steps (Phase 3):
+### Next Steps (Phase 3 Continued):
 
-1. ⏳ Comprehensive shopping cart enhancements
-2. ⏳ Cart persistence and Firebase sync
-3. ⏳ Cart drawer and item quantity management
-4. ⏳ Coupon/discount code system foundation
-5. ⏳ Wishlist persistence and management
+1. **Connect Cart to Firestore**: Enable cart syncing for logged-in users.
+2. **Implement Coupon System**: Create data structure and UI for applying codes.
+3. **Wishlist Sync**: Ensure wishlist items are saved to user profile.
+4. **Checkout Prep**: Refine cart summary for transition to checkout.
 
 ---
 
