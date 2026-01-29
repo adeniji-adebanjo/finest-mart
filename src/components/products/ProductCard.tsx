@@ -7,6 +7,16 @@ import { ProductBadge } from "./ProductBadge";
 import { ProductRating } from "./ProductRating";
 import { ProductPrice } from "./ProductPrice";
 import { ProductQuickView } from "./ProductQuickView";
+import { Heart, ShoppingBag } from "lucide-react";
+import { Product } from "@/types";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { useCart, useWishlist } from "@/app/providers";
+
+interface ProductCardProps {
+  product: Product;
+  view?: "grid" | "list";
+}
 
 export const ProductCard = ({ product, view = "grid" }: ProductCardProps) => {
   const { addToCart, isInCart } = useCart();

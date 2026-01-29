@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[next]/internal/font/google/raleway_65d34cd4.module.css"],"sourcesContent":["@font-face {\n    font-family: 'Raleway Fallback';\n    src: local(\"Arial\");\n    ascent-override: 90.51%;\ndescent-override: 22.53%;\nline-gap-override: 0.00%;\nsize-adjust: 103.86%;\n\n}\n.className {\n    font-family: 'Raleway', 'Raleway Fallback';\n    font-style: normal;\n\n}\n.variable {\n    --font-raleway: 'Raleway', 'Raleway Fallback';\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;;AASA;;;;;AAKA","ignoreList":[0]}}]
-}

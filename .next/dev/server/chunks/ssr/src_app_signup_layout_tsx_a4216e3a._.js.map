@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/User/Documents/Dev_Projects/ReactJs%20Apps/finest-mart/src/app/signup/layout.tsx"],"sourcesContent":["import type { Metadata } from \"next\";\r\n\r\nexport const metadata: Metadata = {\r\n  title: \"Sign Up - Finest Mart\",\r\n  description: \"Create a new Finest Mart account\",\r\n};\r\n\r\nexport default function SignupLayout({\r\n  children,\r\n}: Readonly<{\r\n  children: React.ReactNode;\r\n}>) {\r\n  return <>{children}</>;\r\n}\r\n"],"names":[],"mappings":";;;;;;;;AAEO,MAAM,WAAqB;IAChC,OAAO;IACP,aAAa;AACf;AAEe,SAAS,aAAa,EACnC,QAAQ,EAGR;IACA,qBAAO;kBAAG;;AACZ"}}]
-}
