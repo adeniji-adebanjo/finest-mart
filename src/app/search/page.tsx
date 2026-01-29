@@ -1,14 +1,15 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Grid, List, Search as SearchIcon, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductGrid } from "@/components/products/ProductGrid";
 import { products } from "@/data/products";
 import Link from "next/link";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
-export default function SearchPage() {
+function SearchResults() {
   const searchParams = useSearchParams();
   const query = searchParams.get("q") || "";
   const [view, setView] = useState<"grid" | "list">("grid");
@@ -117,5 +118,19 @@ export default function SearchPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex h-screen w-full items-center justify-center">
+          <LoadingSpinner size="lg" />
+        </div>
+      }
+    >
+      <SearchResults />
+    </Suspense>
   );
 }

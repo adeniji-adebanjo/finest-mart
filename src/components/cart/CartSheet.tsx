@@ -17,20 +17,6 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 
-// Simple ScrollArea fallback if not exists
-const ScrollAreaFallback = ({
-  className,
-  children,
-}: {
-  className?: string;
-  children: React.ReactNode;
-}) => <div className={`overflow-y-auto ${className}`}>{children}</div>;
-
-// Simple Separator fallback
-const SeparatorFallback = ({ className }: { className?: string }) => (
-  <div className={`h-[1px] w-full bg-border ${className}`} />
-);
-
 export const CartSheet = () => {
   const router = useRouter();
   const {
@@ -91,7 +77,7 @@ export const CartSheet = () => {
           </div>
         ) : (
           <>
-            <div className="flex-1 overflow-y-auto px-6 py-4">
+            <ScrollArea className="flex-1 w-full p-6 pr-8">
               <div className="space-y-6">
                 {cartItems.map((item) => (
                   <div key={item.id} className="flex gap-4">
@@ -162,7 +148,7 @@ export const CartSheet = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </ScrollArea>
 
             <div className="border-t border-border bg-muted/10 p-6 space-y-4">
               <div className="space-y-1.5 text-sm">

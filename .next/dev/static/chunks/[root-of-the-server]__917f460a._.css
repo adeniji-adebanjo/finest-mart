@@ -1017,6 +1017,10 @@
     height: calc(var(--spacing) * 2);
   }
 
+  .h-2\.5 {
+    height: calc(var(--spacing) * 2.5);
+  }
+
   .h-4 {
     height: calc(var(--spacing) * 4);
   }
@@ -1085,10 +1089,6 @@
     height: calc(var(--spacing) * 96);
   }
 
-  .h-\[1px\] {
-    height: 1px;
-  }
-
   .h-\[18px\] {
     height: 18px;
   }
@@ -1103,6 +1103,10 @@
 
   .h-px {
     height: 1px;
+  }
+
+  .h-screen {
+    height: 100vh;
   }
 
   .min-h-\[70vh\] {
@@ -1127,6 +1131,10 @@
 
   .w-2 {
     width: calc(var(--spacing) * 2);
+  }
+
+  .w-2\.5 {
+    width: calc(var(--spacing) * 2.5);
   }
 
   .w-3\/4 {
@@ -1322,6 +1330,10 @@
     cursor: pointer;
   }
 
+  .touch-none {
+    touch-action: none;
+  }
+
   .appearance-none {
     appearance: none;
   }
@@ -1504,6 +1516,10 @@
     border-radius: 32px;
   }
 
+  .rounded-\[inherit\] {
+    border-radius: inherit;
+  }
+
   .rounded-full {
     border-radius: 3.40282e38px;
   }
@@ -1683,6 +1699,10 @@
 
   .border-b-primary {
     border-bottom-color: var(--color-primary);
+  }
+
+  .border-l-transparent {
+    border-left-color: #0000;
   }
 
   .bg-amber-100 {
@@ -2132,6 +2152,10 @@
     padding: calc(var(--spacing) * 12);
   }
 
+  .p-px {
+    padding: 1px;
+  }
+
   .px-1\.5 {
     padding-inline: calc(var(--spacing) * 1.5);
   }
@@ -2230,6 +2254,10 @@
 
   .pr-4 {
     padding-right: calc(var(--spacing) * 4);
+  }
+
+  .pr-8 {
+    padding-right: calc(var(--spacing) * 8);
   }
 
   .pr-10 {
@@ -2393,6 +2421,10 @@
 
   .text-amber-700 {
     color: var(--color-amber-700);
+  }
+
+  .text-black {
+    color: var(--color-black);
   }
 
   .text-blue-600 {
@@ -2685,6 +2717,11 @@
     outline-style: none;
   }
 
+  .select-none {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
   .ght-gradient {
     background: linear-gradient(135deg, #24a892 0%, #2eacb8 100%);
   }
@@ -2923,6 +2960,10 @@
 
     .hover\:text-primary:hover {
       color: var(--color-primary);
+    }
+
+    .hover\:text-white:hover {
+      color: var(--color-white);
     }
 
     .hover\:underline:hover {

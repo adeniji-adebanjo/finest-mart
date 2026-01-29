@@ -165,7 +165,7 @@ export default function Home() {
               asChild
               size="lg"
               variant="outline"
-              className="border-white/30 text-white hover:bg-white/10 rounded-xl px-8"
+              className="border-white/30 text-black hover:text-white hover:bg-white/10 rounded-xl px-8"
             >
               <Link href="/signup">Create Account</Link>
             </Button>
