@@ -26,6 +26,8 @@ export const CartSheet = () => {
     closeCart,
     updateQuantity,
     removeFromCart,
+    discount,
+    couponCode,
   } = useCart();
 
   // Hydration safety
@@ -153,8 +155,22 @@ export const CartSheet = () => {
               <div className="space-y-1.5 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Subtotal</span>
-                  <span className="font-medium">${cartTotal.toFixed(2)}</span>
+                  <span className="font-medium">
+                    $
+                    {cartItems
+                      .reduce(
+                        (sum, item) => sum + item.price * item.quantity,
+                        0,
+                      )
+                      .toFixed(2)}
+                  </span>
                 </div>
+                {discount > 0 && (
+                  <div className="flex justify-between text-ght-success">
+                    <span>Discount ({couponCode})</span>
+                    <span>-${discount.toFixed(2)}</span>
+                  </div>
+                )}
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Shipping</span>
                   <span className="font-medium">

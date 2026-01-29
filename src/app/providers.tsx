@@ -9,6 +9,8 @@ import React, {
   useCallback,
 } from "react";
 import type { CartItem, Product } from "@/types";
+import { db } from "@/lib/firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 // --- Cart Context ---
 interface CartContextType {
@@ -23,7 +25,17 @@ interface CartContextType {
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
   isInCart: (productId: string) => boolean;
+  couponCode: string | null;
+  discount: number;
+  applyCoupon: (code: string) => boolean;
+  removeCoupon: () => void;
 }
+
+const COUPONS: Record<string, { type: "percent" | "fixed"; value: number }> = {
+  WELCOME10: { type: "percent", value: 0.1 }, // 10% off
+  SAVE20: { type: "fixed", value: 20 }, // $20 off
+  GHT50: { type: "fixed", value: 50 },
+};
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
@@ -105,6 +117,8 @@ export function Providers({ children }: { children: ReactNode }) {
   // Cart State
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [cartLoaded, setCartLoaded] = useState(false);
+  const [couponCode, setCouponCode] = useState<string | null>(null);
+  const [discount, setDiscount] = useState(0);
 
   // Auth State
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -117,25 +131,156 @@ export function Providers({ children }: { children: ReactNode }) {
 
   // Calculate cart totals
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  const cartTotal = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0,
-  );
+  const cartTotal =
+    cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0) -
+    discount;
 
   // Load cart from localStorage on mount
   useEffect(() => {
     const savedCart = safeLocalStorage.getItem("ght_cart");
     const parsedCart = safeJSONParse<CartItem[]>(savedCart, []);
     setCartItems(parsedCart);
+
+    // Load coupon
+    const savedCoupon = safeLocalStorage.getItem("ght_coupon");
+    if (savedCoupon && COUPONS[savedCoupon]) {
+      setCouponCode(savedCoupon);
+      // Recalculate discount
+      // We need the cart total before discount to calculate percent
+      // But here we are in init. We can just set the coupon code and let the effect or logic handle it.
+      // Actually, we need to set the discount state based on the cart.
+      // But cartItems might not be set yet if using state updater?
+      // No, setCartItems is synchronous-ish in React 18 batching, but we can't rely on `cartItems` variable here.
+      // We have `parsedCart`.
+
+      const subtotal = parsedCart.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0,
+      );
+      const coupon = COUPONS[savedCoupon];
+      let disc = 0;
+      if (coupon.type === "percent") {
+        disc = subtotal * coupon.value;
+      } else {
+        disc = coupon.value;
+      }
+      // Ensure discount doesn't exceed subtotal
+      setDiscount(Math.min(disc, subtotal));
+    }
+
     setCartLoaded(true);
   }, []);
 
+  // Recalculate discount when cart changes
+  useEffect(() => {
+    if (!couponCode) {
+      setDiscount(0);
+      return;
+    }
+
+    const subtotal = cartItems.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0,
+    );
+    const coupon = COUPONS[couponCode];
+
+    if (!coupon) {
+      setDiscount(0);
+      return;
+    }
+
+    let disc = 0;
+    if (coupon.type === "percent") {
+      disc = subtotal * coupon.value;
+    } else {
+      disc = coupon.value;
+    }
+    setDiscount(Math.min(disc, subtotal));
+  }, [cartItems, couponCode]);
+
+  // Save cart to localStorage when it changes
   // Save cart to localStorage when it changes
   useEffect(() => {
     if (cartLoaded) {
       safeLocalStorage.setItem("ght_cart", JSON.stringify(cartItems));
+      if (couponCode) {
+        safeLocalStorage.setItem("ght_coupon", couponCode);
+      } else {
+        safeLocalStorage.removeItem("ght_coupon");
+      }
     }
-  }, [cartItems, cartLoaded]);
+  }, [cartItems, cartLoaded, couponCode]);
+
+  // Sync Cart with Firestore
+  useEffect(() => {
+    if (!userId || !cartLoaded) return;
+
+    const fetchRemoteCart = async () => {
+      try {
+        const userDocRef = doc(db, "users", userId);
+        const userDoc = await getDoc(userDocRef);
+
+        if (userDoc.exists()) {
+          const data = userDoc.data();
+          if (data.cart) {
+            const remoteCart = data.cart as CartItem[];
+
+            setCartItems((currentCart) => {
+              if (currentCart.length === 0) {
+                return remoteCart;
+              }
+
+              // Merge remote into local
+              // We create a map for easier lookups
+              const mergedMap = new Map<string, CartItem>();
+
+              // Add local items first
+              currentCart.forEach((item) => mergedMap.set(item.id, item));
+
+              // Merge remote items
+              remoteCart.forEach((remoteItem) => {
+                if (mergedMap.has(remoteItem.id)) {
+                  // Item exists locally and remotely.
+                  // Strategy: Max quantity or Sum? Let's use Remote (assuming it's the source of truth if saved)
+                  // OR Sum if we treat local as "newly added".
+                  // Let's Sum for better UX (didn't lose "guest" actions).
+                  const existing = mergedMap.get(remoteItem.id)!;
+                  mergedMap.set(remoteItem.id, {
+                    ...existing,
+                    quantity: existing.quantity + remoteItem.quantity,
+                  });
+                } else {
+                  mergedMap.set(remoteItem.id, remoteItem);
+                }
+              });
+
+              return Array.from(mergedMap.values());
+            });
+          }
+        }
+      } catch (error) {
+        console.error("Failed to sync cart from Firestore:", error);
+      }
+    };
+
+    fetchRemoteCart();
+  }, [userId, cartLoaded]);
+
+  // Save Cart to Firestore
+  useEffect(() => {
+    if (!userId || !cartLoaded || !mounted) return;
+
+    const timeout = setTimeout(async () => {
+      try {
+        const userDocRef = doc(db, "users", userId);
+        await setDoc(userDocRef, { cart: cartItems }, { merge: true });
+      } catch (error) {
+        console.error("Failed to save cart to Firestore:", error);
+      }
+    }, 1000); // Debounce 1s
+
+    return () => clearTimeout(timeout);
+  }, [cartItems, userId, cartLoaded, mounted]);
 
   // Load auth from localStorage on mount
   useEffect(() => {
@@ -237,6 +382,18 @@ export function Providers({ children }: { children: ReactNode }) {
     [cartItems],
   );
 
+  const applyCoupon = useCallback((code: string) => {
+    if (COUPONS[code]) {
+      setCouponCode(code);
+      return true;
+    }
+    return false;
+  }, []);
+
+  const removeCoupon = useCallback(() => {
+    setCouponCode(null);
+  }, []);
+
   // Auth Functions
   const login = useCallback((user: string, id?: string) => {
     setIsLoggedIn(true);
@@ -294,6 +451,10 @@ export function Providers({ children }: { children: ReactNode }) {
           updateQuantity,
           clearCart,
           isInCart,
+          couponCode,
+          discount,
+          applyCoupon,
+          removeCoupon,
         }}
       >
         <WishlistContext.Provider

@@ -118,7 +118,7 @@ const Navbar = () => {
             size="icon"
             className="text-muted-foreground hover:text-primary hover:bg-primary/5"
           >
-            <Link href="/dashboard/wishlist">
+            <Link href="/wishlist">
               <Heart size={20} />
             </Link>
           </Button>
