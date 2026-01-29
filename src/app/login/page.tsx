@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { FaGoogle } from "react-icons/fa";
+import { Eye, EyeOff, ArrowRight, Shield, Heart, Truck } from "lucide-react";
 
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
@@ -23,6 +24,7 @@ export const dynamic = "force-dynamic";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { login } = useAuth();
@@ -35,28 +37,27 @@ const Login = () => {
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
       const user = userCredential.user;
 
       Swal.fire({
-        title: "Login Successful!",
-        text: "You are now logged in.",
+        title: "Welcome Back!",
+        text: "You have successfully logged in.",
         icon: "success",
         confirmButtonText: "Go to Dashboard",
-        customClass: {
-          confirmButton: "bg-green-500 text-white px-4 py-2 rounded-lg",
-        },
+        confirmButtonColor: "#27a89a",
       }).then(() => {
-        login(user.email || "User");
+        login(user.email || "User", user.uid);
         router.push("/dashboard");
       });
     } catch (error) {
       Swal.fire({
-        title: "Error",
-        text: "Invalid email or password.",
+        title: "Login Failed",
+        text: "Invalid email or password. Please try again.",
         icon: "error",
         confirmButtonText: "Try Again",
+        confirmButtonColor: "#27a89a",
       });
     } finally {
       setLoading(false);
@@ -69,52 +70,113 @@ const Login = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      login(user.displayName || user.email || "User");
+      login(user.displayName || user.email || "User", user.uid);
 
       Swal.fire({
         icon: "success",
         title: "Welcome!",
         text: "You have logged in with Google successfully!",
+        confirmButtonColor: "#27a89a",
       });
 
       router.push("/dashboard");
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : "An error occurred";
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: error.message,
+        text: errorMessage,
+        confirmButtonColor: "#27a89a",
       });
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <Card className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 bg-background shadow-xl overflow-hidden border-border">
-        {/* Left Side Illustrator */}
-        <div className="hidden md:flex items-center justify-center bg-blue-50 p-8">
-          <img
-            src="https://res.cloudinary.com/ds83mhjcm/image/upload/v1731495121/FinestMart/login_gxcue8.png"
-            alt="Login"
-            className="max-w-full h-auto object-contain"
-          />
-        </div>
+    <div className="min-h-screen flex">
+      {/* Left Side - Branding */}
+      <div className="hidden lg:flex lg:w-1/2 ght-gradient relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-10" />
+        <div className="relative z-10 flex flex-col justify-center px-12 xl:px-20">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3 mb-12">
+            <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-white font-black text-xl">
+              G
+            </div>
+            <div>
+              <span className="text-2xl font-bold text-white">GHT</span>
+              <p className="text-white/70 text-sm">General Health Treatment</p>
+            </div>
+          </Link>
 
-        {/* Right Side Form */}
-        <div className="flex flex-col justify-center p-8 md:p-12">
-          <h2 className="text-3xl font-extrabold text-foreground mb-2">
-            Welcome Back
-          </h2>
-          <p className="text-sm text-muted-foreground mb-8">
-            Don't have an account?{" "}
-            <Link
-              href="/signup"
-              className="font-medium text-primary hover:text-primary/80 underline"
-            >
-              Sign up
-            </Link>
+          <h1 className="text-4xl xl:text-5xl font-bold text-white mb-6 leading-tight">
+            Your Health Journey
+            <br />
+            Starts Here
+          </h1>
+          <p className="text-white/80 text-lg mb-12 max-w-md">
+            Access your personalized dashboard, track orders, and manage your
+            health product subscriptions.
           </p>
 
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          {/* Trust Features */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 text-white/90">
+              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                <Shield size={20} />
+              </div>
+              <span>Secure & encrypted login</span>
+            </div>
+            <div className="flex items-center gap-3 text-white/90">
+              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                <Heart size={20} />
+              </div>
+              <span>Trusted by 50,000+ customers</span>
+            </div>
+            <div className="flex items-center gap-3 text-white/90">
+              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                <Truck size={20} />
+              </div>
+              <span>Fast & reliable delivery</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Decorative circles */}
+        <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-white/5" />
+        <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-white/5" />
+      </div>
+
+      {/* Right Side - Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 bg-background">
+        <div className="w-full max-w-md">
+          {/* Mobile Logo */}
+          <Link
+            href="/"
+            className="flex lg:hidden items-center gap-2 mb-8 justify-center"
+          >
+            <div className="w-10 h-10 rounded-xl ght-gradient flex items-center justify-center text-white font-black">
+              G
+            </div>
+            <span className="text-xl font-bold text-foreground">GHT</span>
+          </Link>
+
+          <div className="text-center lg:text-left mb-8">
+            <h2 className="text-3xl font-bold text-foreground mb-2">
+              Welcome Back
+            </h2>
+            <p className="text-muted-foreground">
+              Don't have an account?{" "}
+              <Link
+                href="/signup"
+                className="font-semibold text-primary hover:underline"
+              >
+                Sign up for free
+              </Link>
+            </p>
+          </div>
+
+          <form className="space-y-5" onSubmit={handleSubmit}>
             <div className="space-y-2">
               <Label htmlFor="email">Email address</Label>
               <Input
@@ -126,38 +188,65 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
+                className="h-12 rounded-xl"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter password"
-              />
+              <div className="flex justify-between items-center">
+                <Label htmlFor="password">Password</Label>
+                <Link
+                  href="/forgot-password"
+                  className="text-sm text-primary hover:underline"
+                >
+                  Forgot password?
+                </Link>
+              </div>
+              <div className="relative">
+                <Input
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="current-password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                  className="h-12 rounded-xl pr-12"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
             </div>
 
             <Button
               type="submit"
               disabled={loading}
-              className="w-full rounded-lg cursor-pointer"
+              size="lg"
+              className="w-full h-12 rounded-xl ght-gradient text-white shadow-lg"
             >
-              {loading ? "Logging in..." : "Login"}
+              {loading ? (
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <>
+                  Sign In
+                  <ArrowRight size={18} className="ml-2" />
+                </>
+              )}
             </Button>
 
-            <div className="relative my-4">
+            <div className="relative my-6">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-border"></div>
+                <div className="w-full border-t border-border" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-background text-muted-foreground">
-                  or
+                <span className="px-4 bg-background text-muted-foreground">
+                  or continue with
                 </span>
               </div>
             </div>
@@ -165,15 +254,27 @@ const Login = () => {
             <Button
               type="button"
               variant="outline"
+              size="lg"
               onClick={handleGoogleLogin}
-              className="w-full rounded-lg"
+              className="w-full h-12 rounded-xl"
             >
               <FaGoogle className="mr-2 text-red-500" />
-              Login with Google
+              Google
             </Button>
           </form>
+
+          <p className="mt-8 text-center text-xs text-muted-foreground">
+            By signing in, you agree to our{" "}
+            <Link href="/terms" className="text-primary hover:underline">
+              Terms of Service
+            </Link>{" "}
+            and{" "}
+            <Link href="/privacy" className="text-primary hover:underline">
+              Privacy Policy
+            </Link>
+          </p>
         </div>
-      </Card>
+      </div>
     </div>
   );
 };

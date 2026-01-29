@@ -1,149 +1,182 @@
-# Finest-Mart
+# GHT - General Health Treatment 🏥
 
-A ReactJS-based e-commerce platform for purchasing a variety of products.
+A modern, full-featured e-commerce platform for health products, supplements, and wellness essentials built with Next.js 16.
 
-## Introduction
+![GHT Banner](./public/images/delivery-man.png)
 
-Finest-Mart is a web application built using ReactJS that provides an e-commerce platform for users to purchase a variety of products. The application is designed to be responsive, user-friendly, and secure.
+## 🌟 Features
 
-## Features
+- **Product Catalog** - Browse health products, supplements, medical equipment, and wellness items
+- **Shopping Cart** - Full cart management with quantity controls and persistent state
+- **User Authentication** - Secure login/signup with Firebase Auth (Email + Google OAuth)
+- **User Dashboard** - Personal dashboard with order history, wishlist, and account management
+- **Responsive Design** - Mobile-first approach, works on all devices (360px+)
+- **Modern UI/UX** - Glassmorphism, smooth animations, and premium aesthetics
+- **SEO Optimized** - Complete meta tags, Open Graph, and Twitter cards
 
-Finest-Mart includes the following features:
+## 🛠️ Tech Stack
 
-- User authentication and authorization
-- Product catalog with search and filtering capabilities
-- Shopping cart and checkout process
-- Order history and tracking
-- Admin dashboard for managing products, orders, and users
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with CSS custom properties
+- **UI Components**: [Radix UI](https://www.radix-ui.com/) primitives + shadcn/ui patterns
+- **Authentication**: [Firebase Auth](https://firebase.google.com/docs/auth)
+- **Database**: [Firebase Firestore](https://firebase.google.com/docs/firestore)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/) + [React Icons](https://react-icons.github.io/)
+- **Fonts**: [Inter](https://fonts.google.com/specimen/Inter) (Google Fonts)
+- **Form Validation**: [Zod](https://zod.dev/)
 
-## Technologies
+## 🎨 Brand Colors
 
-Finest-Mart is built using the following technologies:
+| Color           | Purpose                | Value     |
+| --------------- | ---------------------- | --------- |
+| Primary Teal    | Main brand color, CTAs | `#27A89A` |
+| Secondary Mint  | Accents, backgrounds   | `#9DDBC8` |
+| Success Green   | Confirmations          | `#22C55E` |
+| Warning Amber   | Alerts, promotions     | `#EAB308` |
+| Destructive Red | Errors                 | `#EF4444` |
 
-- ReactJS: A JavaScript library for building user interfaces
-- Redux: A predictable state container for JavaScript apps
-- React Router: A declarative routing library for React
-- Axios: A promise-based HTTP client for the browser and Node.js
-- Bootstrap: A popular CSS framework for building responsive, mobile-first web applications
-- Firebase: A cloud-based platform for building web and mobile applications
-
-## Getting Started
-
-To get started with Finest-Mart, follow these steps:
+## 📦 Getting Started
 
 ### Prerequisites
 
-- Node.js and npm installed on your computer
-- Git installed on your computer
+- Node.js 18+ installed
+- npm or yarn package manager
+- Firebase project (for authentication)
 
-### Clone the Repository
+### Installation
 
-Clone the Finest-Mart repository from GitHub using the following command:
+1. **Clone the repository**
 
-```bash
-git clone https://github.com/adeniji-adebanjo/finest-mart.git
-```
+   ```bash
+   git clone https://github.com/adeniji-adebanjo/finest-mart.git
+   cd finest-mart
+   ```
 
-### Install Dependencies
+2. **Install dependencies**
 
-Navigate to the project directory and install the required dependencies using npm:
+   ```bash
+   npm install
+   ```
 
-```bash
-cd finest-mart
-npm install
-```
+3. **Set up environment variables**
 
-### Start the Development Server
+   Copy `.env.example` to `.env.local` and fill in your Firebase credentials:
 
-Start the development server using the following command:
+   ```bash
+   cp .env.example .env.local
+   ```
 
-```sql
-npm start
-```
+   Required environment variables:
 
-This will start the development server and open the application in your web browser at `http://localhost:3000`.
+   ```env
+   NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+   NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+   ```
 
-## Deployment
+4. **Start the development server**
 
-Finest-Mart can be deployed to a variety of hosting platforms, including GitHub Pages, Netlify, and Heroku. To deploy Finest-Mart to GitHub Pages, follow these steps:
+   ```bash
+   npm run dev
+   ```
 
-### Install gh-pages
+5. **Open your browser**
 
-Install the `gh-pages` package using the following command:
+   Visit [http://localhost:3000](http://localhost:3000)
 
-```
-npm install --save gh-pages
-```
-
-### Update package.json
-
-Update the `homepage` field in the `package.json` file to match the URL of your GitHub Pages site:
-
-```json
-"homepage": "https://adeniji-adebanjo.github.io/finest-mart"
-```
-
-### Add Deploy Script
-
-Add a `deploy` script to the `scripts` section of the `package.json` file:
-
-```json
-"scripts": {
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d build"
-}
-```
-
-### Commit and Push Changes
-
-Commit and push your changes to the GitHub repository.
-
-### Deploy to GitHub Pages
-
-Run the `deploy` script using the following command:
+## 📁 Project Structure
 
 ```
-npm run deploy
+src/
+├── app/                    # Next.js App Router pages
+│   ├── cart/              # Shopping cart page
+│   ├── dashboard/         # User dashboard
+│   ├── login/             # Login page
+│   ├── signup/            # Signup page
+│   ├── globals.css        # Global styles & design tokens
+│   ├── layout.tsx         # Root layout
+│   ├── page.tsx           # Home page
+│   └── providers.tsx      # Context providers
+├── components/            # Reusable components
+│   ├── ui/               # Base UI components (button, card, input, etc.)
+│   ├── Hero.tsx          # Hero section
+│   ├── Navbar.tsx        # Navigation bar
+│   └── ErrorBoundary.tsx # Error boundary
+├── lib/                   # Utilities and configurations
+│   ├── firebase.ts       # Firebase configuration
+│   └── utils.ts          # Helper functions
+└── types/                 # TypeScript type definitions
+    └── index.ts          # All types
 ```
 
-This will build the application and deploy it to the `gh-pages` branch of your GitHub repository.
+## 🚀 Available Scripts
 
-## Contributing
+| Command         | Description              |
+| --------------- | ------------------------ |
+| `npm run dev`   | Start development server |
+| `npm run build` | Build for production     |
+| `npm run start` | Start production server  |
+| `npm run lint`  | Run ESLint               |
 
-Contributions to Finest-Mart are welcome! To contribute, follow these steps:
+## 🔒 Authentication
 
-### Fork the Repository
+GHT uses Firebase Authentication with support for:
 
-Fork the Finest-Mart repository on GitHub.
+- Email/Password sign-in
+- Google OAuth sign-in
 
-### Create a Branch
+User sessions are persisted in localStorage with the key `ght_user`.
 
-Create a new branch for your changes:
+## 🛒 Cart System
 
-```bash
-git checkout -b my-feature-branch
-```
+The cart system features:
 
-### Make Changes
+- Full item management (add, remove, update quantity)
+- Persistent state via localStorage (`ght_cart`)
+- Real-time cart count and total calculations
+- Shipping calculations (free over $50)
+- Tax calculations (8%)
 
-Make your changes and commit them to your branch:
+## 💫 Wishlist
 
-```sql
-git commit -m "Add my feature"
-```
+Users can save products to their wishlist:
 
-### Push Changes
+- Toggle items on/off wishlist
+- Persistent state (`ght_wishlist`)
+- Quick access from dashboard and navbar
 
-Push your changes to your fork:
+## 📱 Responsive Breakpoints
 
-```perl
-git push origin my-feature-branch
-```
+- **Mobile**: 360px - 639px
+- **Tablet**: 640px - 1023px
+- **Desktop**: 1024px+
 
-### Create a Pull Request
+## 🤝 Contributing
 
-Create a pull request from your branch to the main Finest-Mart repository.
+Contributions are welcome! Please follow these steps:
 
-## License
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-Finest-Mart is licensed under the MIT License. See the `LICENSE` file for more information.
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgements
+
+- [Next.js](https://nextjs.org/) for the amazing framework
+- [Tailwind CSS](https://tailwindcss.com/) for utility-first styling
+- [Radix UI](https://www.radix-ui.com/) for accessible primitives
+- [Firebase](https://firebase.google.com/) for backend services
+- [Lucide](https://lucide.dev/) for beautiful icons
+
+---
+
+Made with ❤️ by the GHT Team

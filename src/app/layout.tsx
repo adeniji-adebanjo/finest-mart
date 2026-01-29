@@ -1,27 +1,56 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
-import { Raleway } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { LayoutWrapper } from "./layout-wrapper";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
-const raleway = Raleway({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-raleway",
+  variable: "--font-inter",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Finest Mart - Fresh Groceries Online",
+  title: {
+    default: "GHT - General Health Treatment | Your Trusted Health Partner",
+    template: "%s | GHT - General Health Treatment",
+  },
   description:
-    "Get fresh groceries online with Finest Mart. Fast delivery, quality products, and great prices.",
-  keywords: ["groceries", "online shopping", "fresh food", "delivery"],
-  authors: [{ name: "Finest Mart" }],
+    "GHT (General Health Treatment) is your trusted online destination for health products, supplements, medical equipment, and wellness essentials. Quality healthcare delivered to your doorstep.",
+  keywords: [
+    "health products",
+    "supplements",
+    "vitamins",
+    "medical equipment",
+    "wellness",
+    "healthcare",
+    "pharmacy",
+    "online health store",
+    "GHT",
+    "General Health Treatment",
+  ],
+  authors: [{ name: "GHT - General Health Treatment" }],
+  creator: "GHT Team",
+  publisher: "GHT - General Health Treatment",
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: "Finest Mart - Fresh Groceries Online",
-    description: "Get fresh groceries delivered to your doorstep",
+    title: "GHT - General Health Treatment",
+    description:
+      "Your trusted online destination for health products, supplements, and wellness essentials.",
     type: "website",
+    locale: "en_US",
+    siteName: "GHT - General Health Treatment",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GHT - General Health Treatment",
+    description:
+      "Your trusted online destination for health products and wellness essentials.",
   },
 };
 
@@ -33,7 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${raleway.variable} font-sans antialiased bg-gray-50 min-h-screen flex flex-col`}
+        className={`${inter.variable} font-sans antialiased bg-background min-h-screen flex flex-col`}
       >
         <ErrorBoundary>
           <Providers>

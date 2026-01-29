@@ -1,29 +1,26 @@
 {
-  "short_name": "Finest-Mart",
-  "name": "Finest-Mart",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "maskable any"
-    }
-  ],
+  "name": "GHT - General Health Treatment",
+  "short_name": "GHT",
+  "description": "Your trusted online destination for health products, supplements, and wellness essentials.",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#000000",
-  "description": "A convenient online shopping experience for all your needs.",
+  "background_color": "#f7fafa",
+  "theme_color": "#27a89a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["health", "shopping", "medical"],
   "lang": "en-US"
 }
