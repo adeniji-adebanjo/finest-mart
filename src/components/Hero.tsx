@@ -103,25 +103,31 @@ const Hero = () => {
             {/* CTA Buttons */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-wrap gap-4 pt-4"
+              className="flex items-center gap-2 sm:gap-4 pt-4"
             >
               <Button
                 asChild
-                size="lg"
-                className="ght-gradient text-white shadow-xl shadow-primary/20 hover:opacity-90 rounded-2xl px-8 py-7 h-auto font-black text-lg transition-all hover:scale-[1.02]"
+                className="flex-1 sm:flex-none ght-gradient text-white shadow-xl shadow-primary/20 hover:opacity-90 rounded-2xl px-3 sm:px-8 h-14 font-black text-[11px] sm:text-base transition-all hover:scale-[1.02]"
               >
-                <Link href="/products" className="flex items-center gap-2">
-                  Explore Products
-                  <ArrowRight size={20} className="ml-1" />
+                <Link
+                  href="/products"
+                  className="flex items-center justify-center gap-1 sm:gap-2"
+                >
+                  <span className="whitespace-nowrap">Explore Products</span>
+                  <ArrowRight size={16} className="shrink-0" />
                 </Link>
               </Button>
               <Button
                 asChild
                 variant="outline"
-                size="lg"
-                className="rounded-2xl px-8 py-7 h-auto border-primary/20 bg-background/50 backdrop-blur-sm text-primary font-bold hover:bg-primary/5 transition-all text-lg"
+                className="flex-1 sm:flex-none rounded-2xl px-3 sm:px-8 h-14 border-primary/20 bg-background/50 backdrop-blur-sm text-primary font-bold hover:bg-primary/5 transition-all text-[11px] sm:text-base"
               >
-                <Link href="/consultations">Virtual Consultation</Link>
+                <Link
+                  href="/consultations"
+                  className="flex items-center justify-center text-center"
+                >
+                  <span className="leading-tight">Virtual Consultation</span>
+                </Link>
               </Button>
             </motion.div>
 
