@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -157,11 +158,12 @@ export default function OrdersPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span
-                    className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${statusColors[order.status.toLowerCase()] || statusColors.pending}`}
+                  <Badge
+                    variant="secondary"
+                    className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${statusColors[order.status.toLowerCase()] || statusColors.pending}`}
                   >
                     {order.status}
-                  </span>
+                  </Badge>
                   <Link
                     href={`/dashboard/orders/${order.id}`}
                     className="text-primary hover:text-primary/80"
