@@ -61,7 +61,7 @@ export default function ProductsPage() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="bg-primary/5 py-12 lg:py-20 border-b border-border">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center gap-2 mb-4">
             <Link
               href="/"
@@ -80,7 +80,7 @@ export default function ProductsPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar Filters (Desktop) */}
           <aside className="hidden lg:block w-64 shrink-0">
@@ -92,7 +92,7 @@ export default function ProductsPage() {
           {/* Main Content */}
           <div className="flex-1">
             {/* Toolbar */}
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-8 bg-card p-4 rounded-2xl border border-border/50 shadow-sm">
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-8 bg-card p-3 sm:p-4 rounded-2xl border border-border/50 shadow-sm">
               <div className="flex items-center gap-2">
                 <Button
                   onClick={() => setShowMobileFilters(true)}

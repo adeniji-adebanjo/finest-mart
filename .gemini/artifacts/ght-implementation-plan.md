@@ -23,8 +23,8 @@
 | ----- | -------------------- | -------- | -------------- |
 | 1     | Foundation & Cleanup | Week 1   | ✅ DONE        |
 | 2     | Product System       | Week 2   | ✅ DONE        |
-| 3     | Shopping Cart        | Week 3   | ⏳ IN PROGRESS |
-| 4     | Checkout System      | Week 4   | ⬜             |
+| 3     | Shopping Cart        | Week 3   | ✅ DONE        |
+| 4     | Checkout System      | Week 4   | ⏳ IN PROGRESS |
 | 5     | User Accounts        | Week 5   | ⬜             |
 | 6     | Homepage & Landing   | Week 6   | ⬜             |
 | 7     | Forms & Requests     | Week 7   | ⬜             |
@@ -32,9 +32,16 @@
 | 9     | UI/UX Polish         | Week 9   | ⬜             |
 | 10    | Testing & Launch     | Week 10  | ⬜             |
 
-### Current Status: **Phase 3 Completed / Starting Phase 4**
+### Current Status: **Phase 4 - Checkout System ⏳**
 
-### Phase 3 Progress:
+### Phase 4 Tasks:
+
+1. **Checkout UI**: Create layout and form components (`src/app/checkout/page.tsx`).
+2. **Order Logic**: Implement order creation and validation.
+3. **Success Page**: Create a confirmation page for successful orders.
+4. **Mock Payment**: Implement a visually realistic payment step.
+
+### Phase 3 Completed Items:
 
 1. ✅ Cart Drawer (`CartSheet`) implementation with slide-out effect
 2. ✅ Enhanced `CartContext` for visibility state management

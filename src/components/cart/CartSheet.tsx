@@ -50,7 +50,7 @@ export const CartSheet = () => {
   return (
     <Sheet open={isCartOpen} onOpenChange={closeCart}>
       <SheetContent className="flex flex-col w-full sm:max-w-md p-0 gap-0">
-        <SheetHeader className="px-6 py-4 border-b border-border bg-muted/20">
+        <SheetHeader className="px-4 sm:px-6 py-4 border-b border-border bg-muted/20">
           <SheetTitle className="flex items-center gap-2">
             <ShoppingBag className="h-5 w-5 text-primary" />
             Shopping Cart ({cartCount})
@@ -78,11 +78,11 @@ export const CartSheet = () => {
           </div>
         ) : (
           <>
-            <ScrollArea className="flex-1 w-full p-6 pr-8">
+            <ScrollArea className="flex-1 w-full p-4 sm:p-6 pr-6 sm:pr-8">
               <div className="space-y-6">
                 {cartItems.map((item) => (
                   <div key={item.id} className="flex gap-4">
-                    <div className="w-20 h-20 rounded-lg bg-muted/50 border border-border overflow-hidden flex-shrink-0 relative">
+                    <div className="w-20 h-20 rounded-lg bg-muted/50 border border-border overflow-hidden shrink-0 relative">
                       {item.image ? (
                         <Image
                           src={item.image}
@@ -151,7 +151,7 @@ export const CartSheet = () => {
               </div>
             </ScrollArea>
 
-            <div className="border-t border-border bg-muted/10 p-6 space-y-4">
+            <div className="border-t border-border bg-muted/10 p-4 sm:p-6 space-y-4">
               <div className="space-y-1.5 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Subtotal</span>

@@ -70,27 +70,30 @@ export default function ProductDetailPage() {
   return (
     <div className="min-h-screen bg-background pb-20">
       {/* Breadcrumbs & Navigation */}
-      <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-sm">
-          <Link href="/" className="text-muted-foreground hover:text-primary">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-6 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+        <div className="flex items-center gap-1.5 text-[10px] xs:text-xs sm:text-sm overflow-x-auto no-scrollbar whitespace-nowrap pb-1 sm:pb-0 order-2 sm:order-1 w-full sm:w-auto mt-2 sm:mt-0">
+          <Link
+            href="/"
+            className="text-muted-foreground hover:text-primary shrink-0"
+          >
             Home
           </Link>
-          <span className="text-muted-foreground">/</span>
+          <span className="text-muted-foreground shrink-0">/</span>
           <Link
             href="/products"
-            className="text-muted-foreground hover:text-primary"
+            className="text-muted-foreground hover:text-primary shrink-0"
           >
             Products
           </Link>
-          <span className="text-muted-foreground">/</span>
+          <span className="text-muted-foreground shrink-0">/</span>
           <Link
             href={`/products?category=${product.category}`}
-            className="text-muted-foreground hover:text-primary capitalize"
+            className="text-muted-foreground hover:text-primary capitalize shrink-0"
           >
             {product.category}
           </Link>
-          <span className="text-muted-foreground">/</span>
-          <span className="font-bold text-foreground truncate max-w-[150px] sm:max-w-none">
+          <span className="text-muted-foreground shrink-0">/</span>
+          <span className="font-bold text-foreground truncate max-w-[100px] xs:max-w-[150px] sm:max-w-none shrink-0">
             {product.name}
           </span>
         </div>
@@ -98,13 +101,13 @@ export default function ProductDetailPage() {
           variant="ghost"
           size="sm"
           onClick={() => router.back()}
-          className="text-primary"
+          className="text-primary h-7 px-0 sm:px-3 hover:bg-transparent sm:hover:bg-muted order-1 sm:order-2 text-xs sm:text-sm"
         >
-          <ArrowLeft size={16} className="mr-2" /> Back
+          <ArrowLeft size={14} className="mr-1.5 sm:mr-2" /> Back
         </Button>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20 mb-20">
           {/* Product Images */}
           <div className="space-y-4">
@@ -113,7 +116,7 @@ export default function ProductDetailPage() {
                 src={product.image}
                 alt={product.name}
                 fill
-                className="object-contain p-12 transition-transform duration-700 hover:scale-110"
+                className="object-contain p-6 sm:p-12 transition-transform duration-700 hover:scale-110"
               />
               <div className="absolute top-4 right-4 flex flex-col gap-2">
                 <button
@@ -174,7 +177,7 @@ export default function ProductDetailPage() {
                 )}
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-4 leading-tight">
+              <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-4 leading-tight">
                 {product.name}
               </h1>
 
@@ -203,46 +206,46 @@ export default function ProductDetailPage() {
 
               {/* Purchase Actions */}
               <div className="space-y-6">
-                <div className="flex flex-wrap items-center gap-6">
-                  <div className="flex items-center bg-muted p-1 rounded-2xl border border-border">
+                <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+                  <div className="flex items-center bg-muted p-1 rounded-2xl border border-border shrink-0">
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-12 w-12 rounded-xl"
+                      className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl"
                       onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                     >
-                      <Minus size={20} />
+                      <Minus size={18} />
                     </Button>
-                    <span className="w-12 text-center text-lg font-bold">
+                    <span className="w-10 sm:w-12 text-center text-base sm:text-lg font-bold">
                       {quantity}
                     </span>
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-12 w-12 rounded-xl"
+                      className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl"
                       onClick={() => setQuantity((q) => q + 1)}
                     >
-                      <Plus size={20} />
+                      <Plus size={18} />
                     </Button>
                   </div>
 
                   <Button
                     onClick={handleAddToCart}
                     size="lg"
-                    className={`h-14 px-12 rounded-2xl shadow-xl flex-1 sm:flex-none transition-all duration-300 ${
+                    className={`h-12 sm:h-14 px-6 sm:px-12 rounded-2xl shadow-xl flex-1 sm:flex-none transition-all duration-300 text-sm sm:text-base ${
                       inCart
                         ? "bg-ght-success hover:bg-ght-success/90"
                         : "ght-gradient hover:opacity-90"
                     }`}
                   >
-                    {inCart ? "Add More to Cart" : "Add to Cart"}
-                    <ShoppingBag size={20} className="ml-3" />
+                    {inCart ? "Add More" : "Add to Cart"}
+                    <ShoppingBag size={18} className="ml-2 sm:ml-3" />
                   </Button>
                 </div>
               </div>
             </div>
             {/* Trust Badges */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 pt-8 border-t border-border">
+            <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4 pt-8 border-t border-border">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
                   <Truck size={20} />
@@ -281,38 +284,40 @@ export default function ProductDetailPage() {
         </div>
 
         {/* Tabs - Details, Reviews, FAQs */}
-        <div className="mb-20">
+        <div className="mb-12 lg:mb-20">
           <Tabs defaultValue="details" className="w-full">
-            <TabsList className="w-full justify-start bg-transparent border-b border-border rounded-none h-14 p-0">
+            <TabsList className="w-full justify-start bg-transparent border-b border-border rounded-none h-11 sm:h-14 p-0 overflow-x-auto no-scrollbar">
               <TabsTrigger
                 value="details"
-                className="relative h-14 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-8 font-bold"
+                className="relative h-11 sm:h-14 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-3 sm:px-8 font-bold text-xs sm:text-sm"
               >
                 Details
               </TabsTrigger>
               <TabsTrigger
                 value="specifications"
-                className="relative h-14 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-8 font-bold"
+                className="relative h-11 sm:h-14 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-3 sm:px-8 font-bold text-xs sm:text-sm"
               >
                 Specifications
               </TabsTrigger>
               <TabsTrigger
                 value="reviews"
-                className="relative h-14 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-8 font-bold"
+                className="relative h-11 sm:h-14 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-3 sm:px-8 font-bold text-xs sm:text-sm"
               >
                 Reviews ({product.reviewCount})
               </TabsTrigger>
             </TabsList>
             <TabsContent
               value="details"
-              className="py-12 prose prose-slate max-w-none"
+              className="py-8 sm:py-12 prose prose-slate max-w-none"
             >
-              <h3 className="text-2xl font-black mb-6">Product Overview</h3>
-              <p className="text-lg text-muted-foreground leading-relaxed whitespace-pre-wrap">
+              <h3 className="text-xl sm:text-2xl font-black mb-4 sm:mb-6">
+                Product Overview
+              </h3>
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed whitespace-pre-wrap">
                 {product.description}
               </p>
-              <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-primary/5 p-8 rounded-3xl">
+              <div className="mt-6 sm:mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+                <div className="bg-primary/5 p-5 sm:p-8 rounded-2xl sm:rounded-3xl">
                   <h4 className="text-lg font-bold mb-4 text-primary">
                     Key Benefits
                   </h4>
@@ -331,7 +336,7 @@ export default function ProductDetailPage() {
                     </li>
                   </ul>
                 </div>
-                <div className="bg-secondary/10 p-8 rounded-3xl">
+                <div className="bg-secondary/10 p-5 sm:p-8 rounded-2xl sm:rounded-3xl">
                   <h4 className="text-lg font-bold mb-4 text-primary">
                     How to Use
                   </h4>
@@ -342,8 +347,8 @@ export default function ProductDetailPage() {
                 </div>
               </div>
             </TabsContent>
-            <TabsContent value="specifications" className="py-12">
-              <div className="max-w-3xl space-y-4">
+            <TabsContent value="specifications" className="py-8 sm:py-12">
+              <div className="max-w-3xl space-y-0">
                 {[
                   { label: "SKU", value: product.sku || "GHT-PROD-001" },
                   { label: "Category", value: product.category },
@@ -358,12 +363,12 @@ export default function ProductDetailPage() {
                 ].map((spec, i) => (
                   <div
                     key={i}
-                    className="flex justify-between py-4 border-b border-border"
+                    className="flex flex-col xs:flex-row xs:justify-between py-3 sm:py-4 border-b border-border gap-1 xs:gap-4"
                   >
-                    <span className="font-medium text-muted-foreground">
+                    <span className="text-xs sm:font-medium text-muted-foreground">
                       {spec.label}
                     </span>
-                    <span className="font-bold text-foreground">
+                    <span className="text-sm font-bold text-foreground">
                       {spec.value}
                     </span>
                   </div>

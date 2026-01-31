@@ -170,6 +170,14 @@
   @apply bg-white/80 backdrop-blur-xl border border-white/30 shadow-lg;
 }
 
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @utility glass-dark {
   @apply bg-black/80 backdrop-blur-xl border border-white/10 shadow-lg;
 }

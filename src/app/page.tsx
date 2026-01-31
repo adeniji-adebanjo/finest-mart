@@ -70,7 +70,7 @@ export default function Home() {
 
       {/* Categories Section */}
       <section className="py-16 lg:py-24 bg-background" id="categories">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Shop by Category
@@ -110,7 +110,7 @@ export default function Home() {
 
       {/* Featured Products Section */}
       <section className="py-16 lg:py-24 bg-secondary/30">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12">
             <div>
               <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-2">
@@ -145,7 +145,7 @@ export default function Home() {
         <div className="absolute inset-0 ght-gradient opacity-95" />
         <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-10" />
 
-        <div className="relative max-w-4xl mx-auto px-6 text-center">
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
             Start Your Health Journey Today
           </h2>

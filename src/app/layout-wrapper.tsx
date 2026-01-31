@@ -37,8 +37,8 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
         <footer className="bg-card border-t border-border">
           {/* Trust Badges */}
           <div className="border-b border-border">
-            <div className="max-w-7xl mx-auto px-6 py-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+              <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     <Truck className="w-6 h-6 text-primary" />
@@ -96,7 +96,7 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
           </div>
 
           {/* Main Footer Content */}
-          <div className="max-w-7xl mx-auto px-6 py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {/* Brand Column */}
               <div className="col-span-2 md:col-span-1">
@@ -165,7 +165,7 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
 
           {/* Copyright */}
           <div className="border-t border-border">
-            <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-2">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-2">
               <p className="text-sm text-muted-foreground">
                 © {new Date().getFullYear()} GHT - General Health Treatment. All
                 rights reserved.

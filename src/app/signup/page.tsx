@@ -207,7 +207,7 @@ const SignUp = () => {
       </div>
 
       {/* Right Side - Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 bg-background overflow-y-auto">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-12 bg-background overflow-y-auto">
         <div className="w-full max-w-md">
           {/* Mobile Logo */}
           <Link
@@ -221,7 +221,7 @@ const SignUp = () => {
           </Link>
 
           <div className="text-center lg:text-left mb-8">
-            <h2 className="text-3xl font-bold text-foreground mb-2">
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
               Create Account
             </h2>
             <p className="text-muted-foreground">
@@ -243,7 +243,7 @@ const SignUp = () => {
 
           <form className="space-y-5" onSubmit={handleSubmit}>
             {/* Name Fields */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="firstName">First Name</Label>
                 <Input

@@ -63,7 +63,7 @@ export default function Cart() {
   }
 
   return (
-    <div className="min-h-screen bg-background py-8 lg:py-12 px-6">
+    <div className="min-h-screen bg-background py-8 lg:py-12 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
@@ -91,10 +91,10 @@ export default function Cart() {
           <div className="lg:col-span-2 space-y-4">
             {cartItems.map((item) => (
               <Card key={item.id} className="border-border/50">
-                <CardContent className="p-4 sm:p-6">
-                  <div className="flex gap-4">
+                <CardContent className="p-3 sm:p-6">
+                  <div className="flex gap-3 sm:gap-4">
                     {/* Product Image */}
-                    <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-primary/5 to-secondary/10 rounded-xl flex-shrink-0 overflow-hidden">
+                    <div className="w-20 h-20 xs:w-24 xs:h-24 sm:w-32 sm:h-32 bg-linear-to-br from-primary/5 to-secondary/10 rounded-xl shrink-0 overflow-hidden">
                       {item.image ? (
                         <Image
                           src={item.image}

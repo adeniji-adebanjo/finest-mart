@@ -148,7 +148,7 @@ const Login = () => {
       </div>
 
       {/* Right Side - Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 bg-background">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-12 bg-background">
         <div className="w-full max-w-md">
           {/* Mobile Logo */}
           <Link
@@ -162,7 +162,7 @@ const Login = () => {
           </Link>
 
           <div className="text-center lg:text-left mb-8">
-            <h2 className="text-3xl font-bold text-foreground mb-2">
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
               Welcome Back
             </h2>
             <p className="text-muted-foreground">
