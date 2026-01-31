@@ -4,8 +4,12 @@ import React from "react";
 import { Search, Filter, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ProductCategory, ProductFilters as IProductFilters } from "@/types";
-import { categories } from "@/data/products";
+import {
+  ProductCategory,
+  ProductFilters as IProductFilters,
+  Product,
+} from "@/types";
+import { categories, products } from "@/data/products";
 
 interface ProductFiltersProps {
   filters: IProductFilters;
@@ -115,6 +119,39 @@ export const ProductFilters = ({
             }
             className="h-9 text-xs rounded-lg"
           />
+        </div>
+      </div>
+
+      {/* Brands */}
+      <div className="space-y-3">
+        <h4 className="font-bold text-foreground text-sm uppercase tracking-wider">
+          Brands
+        </h4>
+        <div className="flex flex-col gap-2 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+          {Array.from(
+            new Set(products.map((p: Product) => p.brand).filter(Boolean)),
+          ).map((brand) => (
+            <label
+              key={brand as string}
+              className="flex items-center gap-2 cursor-pointer group"
+            >
+              <input
+                type="checkbox"
+                className="rounded border-border text-primary focus:ring-primary h-4 w-4"
+                checked={filters.brands?.includes(brand as string) || false}
+                onChange={(e) => {
+                  const currentBrands = filters.brands || [];
+                  const newBrands = e.target.checked
+                    ? [...currentBrands, brand as string]
+                    : currentBrands.filter((b: string) => b !== brand);
+                  setFilters((prev) => ({ ...prev, brands: newBrands }));
+                }}
+              />
+              <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                {brand as string}
+              </span>
+            </label>
+          ))}
         </div>
       </div>
 

@@ -70,6 +70,7 @@ export interface ProductFilters {
   minPrice?: number;
   maxPrice?: number;
   brand?: string;
+  brands?: string[];
   inStock?: boolean;
   rating?: number;
   sortBy?: "price-asc" | "price-desc" | "rating" | "newest" | "popular";

@@ -15,6 +15,8 @@ import {
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
+import { products } from "@/data/products";
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isLoggedIn, username, logout } = useAuth();
@@ -23,12 +25,33 @@ const Navbar = () => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState<typeof products>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    if (query.trim().length > 1) {
+      const matches = products
+        .filter(
+          (p) =>
+            p.name.toLowerCase().includes(query.toLowerCase()) ||
+            p.category.toLowerCase().includes(query.toLowerCase()),
+        )
+        .slice(0, 5);
+      setSuggestions(matches);
+      setShowSuggestions(true);
+    } else {
+      setSuggestions([]);
+      setShowSuggestions(false);
+    }
+  };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery("");
+      setShowSuggestions(false);
       setIsMenuOpen(false);
     }
   };
@@ -82,24 +105,75 @@ const Navbar = () => {
         {/* Desktop Actions */}
         <div className="hidden lg:flex items-center space-x-2">
           {/* Search Bar */}
-          <form
-            onSubmit={handleSearch}
-            className="hidden xl:flex items-center relative group"
-          >
-            <input
-              type="text"
-              placeholder="Search health products..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-primary/5 border border-transparent focus:border-primary/30 focus:bg-background h-10 w-64 pl-4 pr-10 rounded-xl text-sm transition-all focus:w-80 outline-none"
-            />
-            <button
-              type="submit"
-              className="absolute right-3 text-muted-foreground group-focus-within:text-primary transition-colors"
+          <div className="hidden xl:flex items-center relative group">
+            <form
+              onSubmit={handleSearch}
+              className="flex items-center relative"
             >
-              <Search size={18} />
-            </button>
-          </form>
+              <input
+                type="text"
+                placeholder="Search health products..."
+                value={searchQuery}
+                onFocus={() =>
+                  searchQuery.length > 1 && setShowSuggestions(true)
+                }
+                onChange={(e) => handleSearchChange(e.target.value)}
+                className="bg-primary/5 border border-transparent focus:border-primary/30 focus:bg-background h-10 w-64 pl-4 pr-10 rounded-xl text-sm transition-all focus:w-80 outline-none"
+              />
+              <button
+                type="submit"
+                className="absolute right-3 text-muted-foreground group-focus-within:text-primary transition-colors"
+              >
+                <Search size={18} />
+              </button>
+            </form>
+
+            {/* Suggestions Dropdown */}
+            {showSuggestions && suggestions.length > 0 && (
+              <div
+                className="absolute top-12 left-0 w-80 bg-background border border-border shadow-2xl rounded-2xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200"
+                onMouseLeave={() => setShowSuggestions(false)}
+              >
+                <div className="p-2 border-b border-border/50 text-[10px] uppercase font-black tracking-widest text-muted-foreground px-4 py-2">
+                  Suggestions
+                </div>
+                {suggestions.map((p) => (
+                  <Link
+                    key={p.id}
+                    href={`/products/${p.category.toLowerCase().replace(/ /g, "-")}/${p.slug}`}
+                    onClick={() => {
+                      setShowSuggestions(false);
+                      setSearchQuery("");
+                    }}
+                    className="flex items-center gap-3 px-4 py-3 hover:bg-primary/5 transition-colors group"
+                  >
+                    <div className="w-10 h-10 bg-muted rounded-lg shrink-0 overflow-hidden flex items-center justify-center">
+                      <img
+                        src={p.image}
+                        alt={p.name}
+                        className="w-8 h-8 object-contain"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-bold text-foreground truncate group-hover:text-primary transition-colors">
+                        {p.name}
+                      </p>
+                      <p className="text-[10px] text-muted-foreground uppercase font-medium">
+                        {p.category}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+                <Link
+                  href={`/search?q=${searchQuery}`}
+                  onClick={() => setShowSuggestions(false)}
+                  className="block w-full text-center py-3 text-xs font-bold text-primary hover:bg-primary/5 border-t border-border/50"
+                >
+                  See all results
+                </Link>
+              </div>
+            )}
+          </div>
 
           {/* Search Button (for smaller screens) */}
           <Button

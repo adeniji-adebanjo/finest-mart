@@ -26,6 +26,7 @@ import { ProductGrid } from "@/components/products/ProductGrid";
 import { ProductBadge } from "@/components/products/ProductBadge";
 import { ProductRating } from "@/components/products/ProductRating";
 import { ProductPrice } from "@/components/products/ProductPrice";
+import { ProductReviews } from "@/components/products/ProductReviews";
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -375,14 +376,11 @@ export default function ProductDetailPage() {
                 ))}
               </div>
             </TabsContent>
-            <TabsContent
-              value="reviews"
-              className="py-12 text-center text-muted-foreground"
-            >
-              <p>
-                Customer reviews coming soon. Be the first to review this
-                product!
-              </p>
+            <TabsContent value="reviews" className="py-12">
+              <ProductReviews
+                productRating={product.rating || 0}
+                reviewCount={product.reviewCount || 0}
+              />
             </TabsContent>
           </Tabs>
         </div>

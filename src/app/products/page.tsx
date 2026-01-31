@@ -41,6 +41,14 @@ export default function ProductsPage() {
         if (filters.maxPrice && p.price > filters.maxPrice) {
           return false;
         }
+        // Brand filter
+        if (
+          filters.brands &&
+          filters.brands.length > 0 &&
+          (!p.brand || !filters.brands.includes(p.brand))
+        ) {
+          return false;
+        }
         // Status filter
         if (filters.inStock && !p.inStock) {
           return false;
