@@ -24,15 +24,15 @@
 | 1     | Foundation & Cleanup | Week 1   | ✅ DONE        |
 | 2     | Product System       | Week 2   | ✅ DONE        |
 | 3     | Shopping Cart        | Week 3   | ✅ DONE        |
-| 4     | Checkout System      | Week 4   | ⏳ IN PROGRESS |
-| 5     | User Accounts        | Week 5   | ⬜             |
-| 6     | Homepage & Landing   | Week 6   | ⬜             |
+| 4     | Checkout System      | Week 4   | ✅ DONE        |
+| 5     | User Accounts        | Week 5   | ✅ DONE        |
+| 6     | Homepage & Landing   | Week 6   | ⏳ IN PROGRESS |
 | 7     | Forms & Requests     | Week 7   | ⬜             |
 | 8     | Advanced Features    | Week 8   | ⬜             |
 | 9     | UI/UX Polish         | Week 9   | ⬜             |
 | 10    | Testing & Launch     | Week 10  | ⬜             |
 
-### Current Status: **Phase 4 - Checkout System ⏳**
+### Current Status: **Phase 6 - Homepage & Landing ⏳**
 
 ### Phase 4 Tasks:
 
