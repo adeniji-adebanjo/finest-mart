@@ -29,7 +29,7 @@
     "eslint": "^9.39.2",
     "eslint-config-next": "^16.1.1",
     "firebase": "^11.0.1",
-    "framer-motion": "^12.24.0",
+    "framer-motion": "^12.25.0",
     "lucide-react": "^0.562.0",
     "next": "^16.1.1",
     "postcss": "^8.5.6",
